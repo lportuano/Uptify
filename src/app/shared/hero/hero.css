@@ -1,0 +1,135 @@
+#form-ui {
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#form {
+    width: 350px; /* Ancho de la tarjeta */
+    padding: 40px 30px;
+    background-color: #121212;
+    box-shadow: 0px 0px 40px rgba(29, 185, 84, 0.15);
+    outline: 1px solid #1DB954;
+    border-radius: 15px;
+    /* Esto centra todo el contenido interno */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+#form-body {
+    /* Eliminamos absolute y margin-top negativo */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#welcome-lines {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#welcome-line-1 {
+    color: #1DB954;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+}
+
+#welcome-line-2 {
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#input-area {
+    width: 100%; /* Para que los inputs respeten su tamaño original */
+}
+
+.form-inp {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    background: #282828;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 100%; /* Ocupa el ancho disponible */
+    box-sizing: border-box; /* Importante para que el padding no lo estire */
+}
+
+.form-inp input {
+    width: 100%;
+    background: none;
+    font-size: 14px;
+    color: #ffffff;
+    border: none;
+    outline: none;
+}
+
+#submit-button-cvr {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#submit-button {
+    width: 100%;
+    color: #000;
+    background-color: #1DB954;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px;
+    border: 0;
+    border-radius: 500px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#submit-button:hover {
+    background-color: #1ed760;
+    transform: scale(1.02);
+}
+
+#forgot-pass {
+    margin-top: 15px;
+}
+
+#forgot-pass a {
+    color: #b3b3b3;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#forgot-pass a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+/* El adorno de los puntitos abajo */
+#bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+#bar::before, #bar::after, .dot-main {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #333;
+}
+
+/* Para mantener tu diseño de puntos, añadiremos uno extra en el HTML si quieres, 
+   o simulamos el central con el propio div #bar */
+#bar {
+    background-color: #1DB954; /* El punto verde */
+    width: 25px;
+    height: 8px;
+    border-radius: 10px;
+    position: relative;
+}

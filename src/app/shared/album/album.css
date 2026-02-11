@@ -1,0 +1,104 @@
+.main-container {
+    background-color: #000;
+    padding-top: 80px;
+    padding-bottom: 0px; /* Elimina el espacio de abajo */
+    margin-bottom: 0px;  /* Asegura que no haya margen externo */
+}
+
+.section-title {
+    color: #fff;
+    font-size: 24px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+/* El Grid Mágico */
+.album-grid {
+    display: grid;
+    /* Crea tantas columnas como quepan, mínimo 180px cada una */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.album-card {
+    background: #181818;
+    padding: 16px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.album-card:hover {
+    background: #282828; /* Se aclara al pasar el mouse */
+}
+
+.img-container {
+    position: relative;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+}
+
+.img-container img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Asegura que la imagen sea siempre cuadrada */
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* El Botón Verde de Play */
+.play-btn {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 48px;
+    height: 48px;
+    background: #1DB954;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,.3);
+    
+    /* Animación de entrada */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Aparece al hacer hover en la tarjeta */
+.album-card:hover .play-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.play-btn:hover {
+    transform: scale(1.05) !important; /* Crece un poquito al tocarlo */
+    background: #1ed760;
+}
+
+/* Textos */
+.album-card h4 {
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    font-family: sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Corta el texto con ... si es muy largo */
+}
+
+.album-card p {
+    color: #b3b3b3;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    font-family: sans-serif;
+    /* Muestra máximo 2 líneas de descripción */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
