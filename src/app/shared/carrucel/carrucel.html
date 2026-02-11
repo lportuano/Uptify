@@ -1,0 +1,137 @@
+<section
+  class="relative w-full min-h-[500px] flex items-center overflow-hidden bg-black text-white px-8 mt-20"
+>
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://i.postimg.cc/h4XcRJt2/Gemini-Generated-Image-ph4qrtph4qrtph4q.png"
+      alt="Background Artist"
+      class="w-full h-full object-cover opacity-30 blur-sm"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
+  </div>
+
+  <div
+    class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-20 w-full max-w-7xl mx-auto items-center"
+  >
+    <div class="space-y-6 md:border-r md:border-white/10 md:pr-16">
+      <div
+        class="flex items-center gap-2 text-green-500 font-bold uppercase tracking-widest text-sm"
+      >
+        <span class="w-8 h-[2px] bg-green-500"></span>
+        Explora
+      </div>
+      <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
+        Últimos <br />
+        Exitos
+      </h1>
+      <p class="text-gray-300 text-lg max-w-md">
+        De tus artistas favoritos. No te pierdas las novedades que están rompiendo las listas
+        globales.
+      </p>
+      <div class="flex gap-4">
+        <button
+          class="bg-[#1DB954] hover:bg-[#1ed760] text-black font-bold py-3 px-8 rounded-full transition transform hover:scale-105"
+        >
+          Escuchar Ahora
+        </button>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden">
+      <h3 class="text-xl font-bold mb-8">Artistas del Momento</h3>
+
+      <div class="flex gap-6 w-max animate-scroll-horizontal hover:pause">
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://cdn-images.dzcdn.net/images/artist/6c14742cfbab1d87f679a9da85fda490/1900x1900-000000-80-0-0.jpg"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Mägo de Oz</p>
+          <span class="text-xs text-gray-400 font-normal italic">Folk Metal</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BOGE3NzU2ZjYtNmNkZC00NTkzLTk3NjctMDI1NDY3M2FkYjVlXkEyXkFqcGc@._V1_.jpg"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Bad Bunny</p>
+          <span class="text-xs text-gray-400 font-normal italic">Trap Latino</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://akamai.sscdn.co/tb/letras-blog/wp-content/uploads/2025/06/4b074d8-beele-1024x538.png"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Beele</p>
+          <span class="text-xs text-gray-400 font-normal italic">Urbano</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/74/Martin_Garrix_%40_Web_Summit_2017.jpg"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Martin Garrix</p>
+          <span class="text-xs text-gray-400 font-normal italic">Electronic</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://www.ecured.cu/images/d/d9/Duki.jpg"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Duki</p>
+          <span class="text-xs text-gray-400 font-normal italic">Trap-Argentino</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://i.scdn.co/image/ab6761610000e5eb0d2f605c23090747230416db"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Romeo Santos</p>
+          <span class="text-xs text-gray-400 font-normal italic">Bachata</span>
+        </div>
+
+        <div class="w-[220px] transition-transform duration-300 hover:scale-105">
+          <img
+            src="https://yt3.googleusercontent.com/jV_3iNb4YlKOkEQGSuB-jPEyAWeA-ur46V_ffZyMjUeh4bSe23p0N0HeaUvxraCMbPjGQVI79A=s900-c-k-c0x00ffffff-no-rj"
+            class="rounded-lg w-[220px] h-[220px] object-cover shadow-2xl border border-white/5"
+          />
+          <p class="mt-3 font-semibold text-sm">Daddy Yankee</p>
+          <span class="text-xs text-gray-400 font-normal italic">Reggaeton</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scrollHero {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-244px * 5));
+    } /* 220px + 24px gap */
+  }
+
+  .animate-scroll-horizontal {
+    display: flex;
+    animation: scrollHero 25s linear infinite;
+  }
+
+  .hover\:pause:hover {
+    animation-play-state: paused;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
