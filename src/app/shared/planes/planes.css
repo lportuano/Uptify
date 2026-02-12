@@ -1,147 +1,181 @@
 .planes-container {
-    background-color: #000;
+    background-color: #050505;
     padding: 80px 20px;
     text-align: center;
     color: white;
-    font-family: sans-serif;
+    font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Fondo con un toque de profundidad espacial */
+    background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #050505 80%);
 }
 
 .planes-title {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.4); /* Glow sutil */
+    letter-spacing: -1.5px;
 }
 
 .planes-subtitle {
-    color: #b3b3b3;
-    margin-bottom: 50px;
+    color: #a5b4fc; /* Azul lila claro */
+    margin-bottom: 60px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .planes-grid {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: stretch;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .plan-card {
-    background-color: #121212;
-    border-radius: 10px;
-    padding: 40px 30px;
-    width: 280px;
-    border: 1px solid #282828;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    background-color: #0f1016;
+    border-radius: 24px;
+    padding: 45px 35px;
+    width: 300px;
+    border: 1px solid #1e293b;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Efecto al pasar el mouse */
+/* Hover general para las tarjetas */
 .plan-card:hover {
-    border-color: #1DB954;
-    transform: translateY(-5px);
+    border-color: #a855f7;
+    transform: translateY(-12px);
+    background-color: #141521;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.2);
 }
 
-/* Estilo para el plan destacado */
+/* Card Destacada (Uptify Premium) */
 .plan-card.featured {
-    border: 2px solid #1DB954;
-    background-color: #181818;
+    border: 2px solid #a855f7;
+    background-color: #11121e;
     transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(29, 185, 84, 0.1);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.25);
 }
 
 .plan-card.featured:hover {
-    transform: scale(1.08);
+    transform: scale(1.08) translateY(-10px);
 }
 
+/* Badge Superior estilo Neón */
 .badge {
-    background-color: #1DB954;
-    color: black;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 5px 12px;
-    border-radius: 4px;
+    background: linear-gradient(90deg, #a855f7, #6366f1);
+    color: #ffffff;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+    padding: 8px 20px;
+    border-radius: 50px;
     position: absolute;
-    top: -15px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.badge-vacio {
-    height: 20px;
-    display: block;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .plan-name {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: 800;
     margin: 10px 0;
+    color: #ffffff; /* Siempre blanco */
 }
 
 .plan-price {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #ffffff; /* Siempre blanco */
+    letter-spacing: -1px;
 }
 
 .plan-price span {
-    font-size: 14px;
-    color: #b3b3b3;
+    font-size: 16px;
+    color: #94a3b8; /* Gris azulado para el "/ mes" */
+    font-weight: 400;
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #282828;
-    margin: 20px 0;
+    border-top: 1px solid #1e293b;
+    margin: 25px 0;
 }
 
 .features-list {
     list-style: none;
     padding: 0;
     text-align: left;
-    margin-bottom: 30px;
-    min-height: 120px;
+    margin-bottom: 40px;
+    flex-grow: 1;
 }
 
 .features-list li {
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #fff;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: #e2e8f0; /* Blanco suave */
+    display: flex;
+    align-items: center;
 }
 
+/* El check ahora es morado eléctrico */
 .features-list li span {
-    color: #1DB954;
-    margin-right: 10px;
+    color: #a855f7; 
+    margin-right: 12px;
+    font-size: 20px;
     font-weight: bold;
 }
 
-/* Botones */
+/* La 'X' de los planes gratis en gris para no ensuciar el diseño */
+.features-list li .x-icon {
+    color: #475569;
+}
+
+/* Botones con estilo premium */
 .plan-btn-outline {
     display: block;
     text-decoration: none;
-    color: white;
-    border: 1px solid #b3b3b3;
-    padding: 12px;
+    color: #ffffff;
+    border: 2px solid #334155;
+    padding: 16px;
     border-radius: 500px;
-    font-weight: bold;
-    transition: 0.2s;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 .plan-btn-outline:hover {
-    border-color: white;
-    transform: scale(1.04);
+    border-color: #a855f7;
+    background-color: rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
 }
 
 .plan-btn-filled {
     display: block;
     text-decoration: none;
-    color: black;
-    background-color: #1DB954;
-    padding: 14px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #a855f7, #6366f1);
+    padding: 18px;
     border-radius: 500px;
-    font-weight: bold;
-    transition: 0.2s;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s ease;
 }
 
 .plan-btn-filled:hover {
-    background-color: #1ed760;
-    transform: scale(1.04);
+    filter: brightness(1.2);
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(168, 85, 247, 0.6);
 }

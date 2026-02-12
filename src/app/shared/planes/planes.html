@@ -1,46 +1,60 @@
-<section class="planes-container">
-    <h2 class="planes-title">Elige tu plan</h2>
-    <p class="planes-subtitle">Escucha sin límites en tu teléfono, altavoz y otros dispositivos.</p>
+<section class="bg-black py-16 px-4">
+    <hr>
+    <div class="max-w-6xl mx-auto text-center mb-12">
+        <ng-content select="[header]"></ng-content>
+    </div>
 
-    <div class="planes-grid">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+
         <div class="plan-card">
-            <span class="badge-vacio"></span>
-            <h3 class="plan-name">Gratis</h3>
-            <p class="plan-price">$0.00<span> / mes</span></p>
-            <hr>
-            <ul class="features-list">
-                <li><span>✓</span> Música con anuncios</li>
-                <li><span>✓</span> Solo modo aleatorio</li>
-                <li><span>✕</span> Sin modo offline</li>
-            </ul>
-            <a routerLink="/registro" class="plan-btn-outline">Empezar gratis</a>
+            <ng-content select="[card1-content]">
+                <h3 class="plan-name">{{ listaPlanes[0].nombre }}</h3>
+                <p class="plan-price">${{ listaPlanes[0].precio }}<span> / mes</span></p>
+                <hr>
+                <ul class="features-list">
+                    @for (feat of listaPlanes[0].caracteristicas; track feat.texto) {
+                    <li><span [class]="feat.incluida ? 'check' : 'x'">{{ feat.incluida ? '✓' : '✕' }}</span> {{
+                        feat.texto }}</li>
+                    }
+                </ul>
+                <a [routerLink]="listaPlanes[0].ruta" class="btn-outline">{{ listaPlanes[0].textoBoton }}</a>
+            </ng-content>
         </div>
 
         <div class="plan-card featured">
-            <span class="badge">RECOMENDADO</span>
-            <h3 class="plan-name">Premium</h3>
-            <p class="plan-price">$9.99<span> / mes</span></p>
-            <hr>
-            <ul class="features-list">
-                <li><span>✓</span> Música sin anuncios</li>
-                <li><span>✓</span> Descarga para escuchar offline</li>
-                <li><span>✓</span> Audio de alta fidelidad</li>
-                <li><span>✓</span> Escucha en orden aleatorio</li>
-            </ul>
-            <a routerLink="/registro" class="plan-btn-filled">Prueba Premium</a>
+            <ng-content select="[card2-content]">
+                <span class="badge">RECOMENDADO</span>
+                <h3 class="plan-name">{{ listaPlanes[1].nombre }}</h3>
+                <p class="plan-price">${{ listaPlanes[1].precio }}<span> / mes</span></p>
+                <hr>
+                <ul class="features-list">
+                    @for (feat of listaPlanes[1].caracteristicas; track feat.texto) {
+                    <li><span [class]="feat.incluida ? 'check' : 'x'">{{ feat.incluida ? '✓' : '✕' }}</span> {{
+                        feat.texto }}</li>
+                    }
+                </ul>
+                <a [routerLink]="listaPlanes[1].ruta" class="btn-filled">{{ listaPlanes[1].textoBoton }}</a>
+            </ng-content>
         </div>
 
         <div class="plan-card">
-            <span class="badge-vacio"></span>
-            <h3 class="plan-name">Familiar</h3>
-            <p class="plan-price">$14.99<span> / mes</span></p>
-            <hr>
-            <ul class="features-list">
-                <li><span>✓</span> Hasta 6 cuentas Premium</li>
-                <li><span>✓</span> Bloqueo de contenido explícito</li>
-                <li><span>✓</span> Mix familiar</li>
-            </ul>
-            <a routerLink="/registro" class="plan-btn-outline">Obtener Familiar</a>
+            <ng-content select="[card3-content]">
+                <h3 class="plan-name">{{ listaPlanes[2].nombre }}</h3>
+                <p class="plan-price">${{ listaPlanes[2].precio }}<span> / mes</span></p>
+                <hr>
+                <ul class="features-list">
+                    @for (feat of listaPlanes[2].caracteristicas; track feat.texto) {
+                    <li><span [class]="feat.incluida ? 'check' : 'x'">{{ feat.incluida ? '✓' : '✕' }}</span> {{
+                        feat.texto }}</li>
+                    }
+                </ul>
+                <a [routerLink]="listaPlanes[2].ruta" class="btn-outline">{{ listaPlanes[2].textoBoton }}</a>
+            </ng-content>
         </div>
+
+    </div>
+
+    <div class="mt-10 text-center">
+        <ng-content select="[footer]"></ng-content>
     </div>
 </section>

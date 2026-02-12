@@ -1,0 +1,82 @@
+/* Contenedor específico para la comparativa */
+.conocenos-header {
+    margin-bottom: 80px;
+    animation: fadeInDown 1s ease-out;
+}
+
+/* Título con efecto de nebulosa */
+.conocenos-header h2 {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #ffffff, #a855f7, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+/* Tarjetas de la competencia (Card 1 y 3) */
+/* Forzamos un estilo más "apagado" para resaltar la nuestra */
+.plan-card:not(.featured) {
+    filter: grayscale(0.8);
+    opacity: 0.7;
+    border: 1px dashed #334155; /* Borde discontinuo para que parezca "incompleto" */
+}
+
+.plan-card:not(.featured):hover {
+    filter: grayscale(0.4);
+    opacity: 0.9;
+    border-style: solid;
+}
+
+/* Tarjeta Primordial: UPTIFY (Card 2) */
+.plan-card.featured {
+    background: linear-gradient(180deg, #13141f 0%, #050505 100%);
+    border: 2px solid #a855f7;
+    z-index: 10;
+    box-shadow: 0 0 50px rgba(168, 85, 247, 0.3), inset 0 0 20px rgba(168, 85, 247, 0.1);
+}
+
+/* Estilo de los items de la competencia */
+.plan-card:not(.featured) .features-list li {
+    color: #64748b;
+}
+
+/* Estilo de los items de UPTIFY */
+.plan-card.featured .features-list li {
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Animación de "Pulso Galáctico" para el botón de Uptify */
+.plan-card.featured .plan-btn-filled {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.7); }
+    100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.4); }
+}
+
+/* Footer de la sección */
+.conocenos-footer {
+    margin-top: 60px;
+    padding: 30px;
+    border-top: 1px solid #1e293b;
+    background: rgba(168, 85, 247, 0.03);
+    border-radius: 20px;
+}
+
+.conocenos-footer p {
+    color: #94a3b8;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
