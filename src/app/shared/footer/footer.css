@@ -2,8 +2,9 @@
     background-color: #000;
     color: #fff;
     padding: 50px 20px 20px 20px;
-    font-family: sans-serif;
-    border-top: 1px solid #282828;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    /* Borde superior con el color púrpura de Uptify */
+    border-top: 2px solid #7209b7;
 }
 
 .footer-content {
@@ -15,67 +16,89 @@
     margin: 0 auto;
 }
 
-.footer-section {
-    flex: 1;
-    min-width: 150px;
-}
-
-.footer-logo {
-    font-size: 22px;
-    color: #1DB954;
-    /* Verde Spotify */
+/* Estilos del Logo en el Footer */
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-bottom: 15px;
 }
 
-.footer-section h4 {
+.footer-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    /* Foto redonda */
+    border: 1px solid #4cc9f0;
+    filter: drop-shadow(0 0 5px #4cc9f0);
+}
+
+.footer-logo {
+    font-size: 26px;
+    font-weight: bold;
+    /* Texto con degradado galáctico */
+    background: linear-gradient(90deg, #4cc9f0, #7209b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.footer-tagline {
     color: #b3b3b3;
+    font-size: 14px;
+}
+
+.footer-section h4 {
+    color: #4cc9f0;
+    /* Títulos en Cian */
     text-transform: uppercase;
     font-size: 12px;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     margin-bottom: 20px;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
+    font-weight: 800;
 }
 
 .footer-section ul li a {
     text-decoration: none;
     color: #b3b3b3;
     font-size: 14px;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
 }
 
 .footer-section ul li a:hover {
     color: #fff;
+    padding-left: 5px;
+    /* Efecto de desplazamiento */
+    text-shadow: 0 0 8px #7209b7;
 }
 
+/* Iconos Sociales con Brillo */
 .socials {
     display: flex;
     gap: 15px;
-    justify-content: flex-end;
 }
 
 .social-icon {
-    background-color: #292929;
-    width: 40px;
-    height: 40px;
+    background: linear-gradient(135deg, #1a1a1a, #292929);
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     color: white;
-    transition: background-color 0.2s;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
 }
 
 .social-icon:hover {
-    background-color: #535353;
+    background: linear-gradient(90deg, #4cc9f0, #7209b7);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(114, 9, 183, 0.4);
+    border-color: #fff;
 }
 
 /* Parte Inferior */
@@ -86,7 +109,9 @@
 
 hr {
     border: 0;
-    border-top: 1px solid #282828;
+    border-top: 1px solid #7209b7;
+    /* Línea divisoria púrpura */
+    opacity: 0.3;
     margin-bottom: 20px;
 }
 
@@ -95,17 +120,47 @@ hr {
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: #b3b3b3;
+    color: #777;
     flex-wrap: wrap;
     gap: 10px;
 }
 
 .legal-links a {
-    color: #b3b3b3;
+    color: #777;
     text-decoration: none;
     margin-left: 15px;
 }
 
 .legal-links a:hover {
+    color: #4cc9f0;
+}
+
+.socials {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end; /* Alineados a la derecha como en tu diseño original */
+}
+
+.social-icon {
+    background-color: #000; /* Fondo negro */
+    color: #fff;           /* Contenido (icono) blanco */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;    /* Totalmente redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;       /* Tamaño del icono */
+    border: 1px solid #333; /* Borde sutil para que se vea sobre fondos oscuros */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse - Colores de Uptify */
+.social-icon:hover {
+    background: linear-gradient(90deg, #4cc9f0, #7209b7); /* Degradado Cian a Púrpura */
     color: #fff;
+    transform: translateY(-5px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 5px 15px rgba(114, 9, 183, 0.5); /* Resplandor púrpura */
+    border-color: #fff;
 }

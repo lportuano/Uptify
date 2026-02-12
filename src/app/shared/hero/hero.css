@@ -1,135 +1,301 @@
+/* ==========================================================================
+   1. SECCIÓN PRINCIPAL (CONTENEDOR GLOBAL Y FONDO ESTELAR)
+   ========================================================================== */
+.uptify-dna,
 #form-ui {
+    padding: 120px 20px 100px;
+    /* Separación generosa del Navbar */
     background-color: #000;
-    min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    /* Fondo con profundidad de nebulosa */
+    background-image: radial-gradient(circle at center, #110022 0%, #000 80%);
 }
 
+/* Capa 1: Estrellas fijas (Constelación base) */
+.uptify-dna::before,
+#form-ui::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 50%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 10%, #4cc9f0, transparent),
+        radial-gradient(1px 1px at 85% 85%, #7209b7, transparent);
+    background-size: 250px 250px;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+/* Capa 2: Estrellas Fugaces Finas */
+.uptify-dna::after,
+#form-ui::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-image:
+        linear-gradient(45deg, #fff, rgba(76, 201, 240, 0) 70%),
+        linear-gradient(45deg, #fff, rgba(114, 9, 183, 0) 70%);
+    background-repeat: no-repeat;
+    background-size: 1px 100px, 1px 80px;
+    background-position: 10% 10%, 80% 15%;
+    animation: constellation-rush 8s linear infinite;
+    z-index: 0;
+    opacity: 0;
+}
+
+@keyframes constellation-rush {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    25% {
+        transform: translate(30%, 30%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(100%, 100%);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   2. BENTO GRID (TARJETAS DINÁMICAS)
+   ========================================================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(220px, auto);
+    gap: 25px;
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.bento-item {
+    background: rgba(10, 10, 10, 0.75);
+    border-radius: 28px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Tarjeta del Origen (Ancho Total arriba) */
+.item-large {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    padding: 60px;
+    margin-bottom: 20px;
+    min-height: 400px;
+}
+
+/* Efecto de Borde Neón Giratorio (Hover) */
+.bento-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, #4cc9f0, transparent 30%);
+    animation: rotate-border 4s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.bento-item::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #0a0a0a;
+    border-radius: 26px;
+    z-index: -1;
+}
+
+.bento-item:hover {
+    transform: translateY(-10px);
+    border-color: rgba(76, 201, 240, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.bento-item:hover::before {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   3. ESTILOS DE FORMULARIO (ESTÉTICA PRO)
+   ========================================================================== */
 #form {
-    width: 350px; /* Ancho de la tarjeta */
-    padding: 40px 30px;
-    background-color: #121212;
-    box-shadow: 0px 0px 40px rgba(29, 185, 84, 0.15);
-    outline: 1px solid #1DB954;
-    border-radius: 15px;
-    /* Esto centra todo el contenido interno */
+    width: 380px;
+    padding: 50px 40px;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(25px);
+    border-radius: 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    transition: all 0.5s ease;
 }
 
-#form-body {
-    /* Eliminamos absolute y margin-top negativo */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#welcome-lines {
-    text-align: center;
-    margin-bottom: 30px;
+#form:hover {
+    border-color: rgba(76, 201, 240, 0.5);
+    transform: translateY(-8px);
 }
 
 #welcome-line-1 {
-    color: #1DB954;
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 1;
+    background: linear-gradient(90deg, #fff, #4cc9f0, #7209b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    font-size: 48px;
+    letter-spacing: -2px;
+    line-height: 0.9;
 }
 
 #welcome-line-2 {
     color: #ffffff;
-    font-size: 16px;
-    margin-top: 10px;
-}
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+        opacity: 0.9;
 
-#input-area {
-    width: 100%; /* Para que los inputs respeten su tamaño original */
 }
 
 .form-inp {
-    margin-bottom: 15px;
-    padding: 12px 15px;
-    background: #282828;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    width: 100%; /* Ocupa el ancho disponible */
-    box-sizing: border-box; /* Importante para que el padding no lo estire */
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .form-inp input {
     width: 100%;
-    background: none;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
     font-size: 14px;
     color: #ffffff;
-    border: none;
     outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
 }
 
-#submit-button-cvr {
-    width: 100%;
-    margin-top: 10px;
+.form-inp input:focus {
+    border-color: #4cc9f0;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.2);
 }
 
 #submit-button {
     width: 100%;
-    color: #000;
-    background-color: #1DB954;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, #4cc9f0, #7209b7);
+    font-weight: 800;
+    padding: 18px;
+    border-radius: 14px;
     border: 0;
-    border-radius: 500px;
     cursor: pointer;
-    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
 }
 
 #submit-button:hover {
-    background-color: #1ed760;
+    box-shadow: 0 0 30px rgba(76, 201, 240, 0.4);
+    filter: brightness(1.1);
     transform: scale(1.02);
 }
 
-#forgot-pass {
-    margin-top: 15px;
-}
-
-#forgot-pass a {
-    color: #b3b3b3;
-    font-size: 12px;
-    text-decoration: none;
-}
-
-#forgot-pass a:hover {
-    text-decoration: underline;
-    color: #fff;
-}
-
-/* El adorno de los puntitos abajo */
+/* Barra de Energía Inferior */
 #bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 30px;
-}
-
-#bar::before, #bar::after, .dot-main {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #333;
-}
-
-/* Para mantener tu diseño de puntos, añadiremos uno extra en el HTML si quieres, 
-   o simulamos el central con el propio div #bar */
-#bar {
-    background-color: #1DB954; /* El punto verde */
-    width: 25px;
-    height: 8px;
+    background: linear-gradient(90deg, #4cc9f0, #7209b7);
+    width: 60px;
+    height: 4px;
     border-radius: 10px;
-    position: relative;
+    margin-top: 30px;
+    animation: charging 2s infinite alternate ease-in-out;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+}
+
+/* ==========================================================================
+   4. ANIMACIONES ADICIONALES
+   ========================================================================== */
+@keyframes rotate-border {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes charging {
+    from {
+        width: 40px;
+        opacity: 0.6;
+    }
+
+    to {
+        width: 80px;
+        opacity: 1;
+    }
+}
+
+/* Astronauta Flotante */
+.floating-img {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    height: 120px;
+    filter: drop-shadow(0 0 25px rgba(76, 201, 240, 0.5));
+    animation: float-dna 6s ease-in-out infinite;
+}
+
+@keyframes float-dna {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(5deg);
+    }
 }
