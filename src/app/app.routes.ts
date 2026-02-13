@@ -4,6 +4,7 @@ import { Registro } from './features/registro/registro';
 import { Login } from './features/login/login';
 import { Conocenos } from './features/conocenos/conocenos';
 import { Error } from './shared/error/error';
+import { Perfil } from './features/perfil/perfil';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -12,5 +13,7 @@ export const routes: Routes = [
     { path: 'registro', component: Registro },
     { path: 'login', component: Login },
     { path: 'error', component: Error },
+
+    { path: 'perfil', component: Perfil },
     
 ];

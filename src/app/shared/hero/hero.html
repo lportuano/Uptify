@@ -1,4 +1,4 @@
-  <div id="form-ui" [class.con-galaxia]="!mostrarVideo">
+<div id="form-ui" [class.con-galaxia]="!mostrarVideo">
   <video autoplay muted loop playsinline id="bg-video" [style.display]="mostrarVideo ? 'block' : 'none'">
     <source src="video/fondo.mp4" type="video/mp4" />
   </video>
@@ -32,6 +32,14 @@
         <button (click)="mensaje()" id="submit-button" type="submit">
           {{ editando ? 'Actualizar' : textoBoton }}
         </button>
+
+        @if (!confirmarContrasenia && !editando) {
+        <button (click)="irAPerfil()" id="perfil-button" type="button"
+          class="mt-2 text-[#4cc9f0] text-[10px] tracking-[3px] uppercase font-bold opacity-70 hover:opacity-100 transition-opacity">
+          Ver mi Perfil 👤
+        </button>
+        }
+
       </div>
       <div id="bar"></div>
     </div>

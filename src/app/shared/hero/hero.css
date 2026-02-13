@@ -237,3 +237,23 @@ td {
     padding-left: 24px !important;
     padding-right: 24px !important;
 }
+
+/* Estilo opcional para que el botón de perfil no sea idéntico al de entrar */
+#perfil-button {
+    background: transparent;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+    color: #fff;
+    padding: 15px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+#perfil-button:hover {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: #4cc9f0;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.2);
+}

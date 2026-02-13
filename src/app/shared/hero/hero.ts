@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { UsuarioServicio } from '../../services/usuario-servicio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
@@ -13,6 +14,8 @@ import { UsuarioServicio } from '../../services/usuario-servicio';
 export class Hero {
 
   private servicioUsuario = inject(UsuarioServicio);
+
+  private router = inject(Router);
 
   @Input() subtitulo: string = '';
   @Input() usuario: string = '';
@@ -93,4 +96,8 @@ export class Hero {
       this.nuevoUsuario = { name: '', email: '', password: '' };
     })
   }*/
+
+    irAPerfil() {
+    this.router.navigate(['/perfil']);
+  }
 }

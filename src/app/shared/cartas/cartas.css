@@ -1,0 +1,194 @@
+/* =========================================
+   1. RESET GLOBAL Y CUERPO (FONDO NEGRO)
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #000000 !important; /* Negro absoluto */
+    color: #ffffff;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================================
+   2. CONTENEDOR PRINCIPAL (LAYOUT)
+   ========================================= */
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Título arriba, Carrusel abajo */
+    align-items: center;
+    justify-content: flex-start; /* Empieza desde arriba */
+    background-color: #000000;
+    padding-top: 60px; /* Espacio superior */
+    perspective: 1200px;
+    margin-top: 60px;
+}
+
+/* =========================================
+   3. TÍTULO BIENVENIDO (ESTILO UPTIFY)
+   ========================================= */
+.welcome-title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 100px; /* Espacio para que el carrusel no choque */
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    
+    /* Efecto de degradado en el texto */
+    background-image: linear-gradient(90deg, #00f2ff, #7000ff, #00f2ff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Animaciones */
+    animation: 
+        entrance 1.2s ease-out forwards, 
+        shine 4s linear infinite,        
+        float 3s ease-in-out infinite;
+    
+    z-index: 10;
+}
+
+/* =========================================
+   4. CARRUSEL 3D
+   ========================================= */
+.inner {
+    --w: 200px;
+    --h: 300px;
+    --translateZ: 450px; /* Radio del giro */
+    --rotateX: -10deg;
+    
+    position: relative;
+    width: var(--w);
+    height: var(--h);
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rotateX));
+    animation: rotating 25s linear infinite;
+}
+
+.inner:hover {
+    animation-play-state: paused; /* Se detiene al pasar el mouse */
+}
+
+/* =========================================
+   5. DISEÑO DE LAS TARJETAS
+   ========================================= */
+.card {
+    position: absolute;
+    inset: 0;
+    background: #0a0a0a; /* Fondo muy oscuro para la tarjeta */
+    border: 2px solid rgba(var(--color-card), 0.8);
+    border-radius: 20px;
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+    box-shadow: 0 0 15px rgba(var(--color-card), 0.2);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(calc(var(--translateZ) + 50px)) scale(1.05);
+    border-color: #ffffff;
+    box-shadow: 0 0 35px rgba(var(--color-card), 0.6);
+    z-index: 50;
+    cursor: pointer;
+}
+
+.card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.artist-name {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.img-container {
+    width: 100%;
+    height: 130px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.artist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .artist-img {
+    transform: scale(1.1);
+}
+
+.albums-list {
+    list-style: none;
+    padding: 0;
+}
+
+.albums-list li {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================================
+   6. ANIMACIONES (KEYFRAMES)
+   ========================================= */
+
+/* Giro del carrusel */
+@keyframes rotating {
+    from { transform: rotateX(var(--rotateX)) rotateY(0deg); }
+    to { transform: rotateX(var(--rotateX)) rotateY(360deg); }
+}
+
+/* Entrada del título */
+@keyframes entrance {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Brillo del degradado */
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* Flotación y sombra neón */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+        filter: drop-shadow(0 5px 15px rgba(0, 242, 255, 0.2));
+    }
+    50% {
+        transform: translateY(-10px);
+        filter: drop-shadow(0 20px 30px rgba(112, 0, 255, 0.4));
+    }
+}
