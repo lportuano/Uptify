@@ -1,10 +1,5 @@
-/* ==========================================================================
-   1. SECCIÓN PRINCIPAL (CONTENEDOR GLOBAL Y FONDO ESTELAR)
-   ========================================================================== */
-.uptify-dna,
 #form-ui {
     padding: 120px 20px 100px;
-    /* Separación generosa del Navbar */
     background-color: #000;
     display: flex;
     flex-direction: column;
@@ -13,19 +8,18 @@
     min-height: 100vh;
     overflow: hidden;
     position: relative;
-    /* Fondo con profundidad de nebulosa */
+    z-index: 1;
+    transition: background 0.5s ease;
+}
+
+#form-ui.con-galaxia {
     background-image: radial-gradient(circle at center, #110022 0%, #000 80%);
 }
 
-/* Capa 1: Estrellas fijas (Constelación base) */
-.uptify-dna::before,
-#form-ui::before {
+#form-ui.con-galaxia::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-image:
         radial-gradient(1px 1px at 20% 30%, #fff, transparent),
         radial-gradient(1px 1px at 70% 50%, #fff, transparent),
@@ -33,19 +27,15 @@
         radial-gradient(1px 1px at 10% 10%, #4cc9f0, transparent),
         radial-gradient(1px 1px at 85% 85%, #7209b7, transparent);
     background-size: 250px 250px;
-    z-index: 0;
     opacity: 0.4;
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* Capa 2: Estrellas Fugaces Finas */
-.uptify-dna::after,
-#form-ui::after {
+#form-ui.con-galaxia::after {
     content: "";
     position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
+    inset: -10%;
     background-image:
         linear-gradient(45deg, #fff, rgba(76, 201, 240, 0) 70%),
         linear-gradient(45deg, #fff, rgba(114, 9, 183, 0) 70%);
@@ -53,105 +43,25 @@
     background-size: 1px 100px, 1px 80px;
     background-position: 10% 10%, 80% 15%;
     animation: constellation-rush 8s linear infinite;
-    z-index: 0;
-    opacity: 0;
-}
-
-@keyframes constellation-rush {
-    0% {
-        transform: translate(0, 0);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.8;
-    }
-
-    25% {
-        transform: translate(30%, 30%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translate(100%, 100%);
-        opacity: 0;
-    }
-}
-
-/* ==========================================================================
-   2. BENTO GRID (TARJETAS DINÁMICAS)
-   ========================================================================== */
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(220px, auto);
-    gap: 25px;
-    max-width: 1200px;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-}
-
-.bento-item {
-    background: rgba(10, 10, 10, 0.75);
-    border-radius: 28px;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(20px);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Tarjeta del Origen (Ancho Total arriba) */
-.item-large {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    align-items: center;
-    padding: 60px;
-    margin-bottom: 20px;
-    min-height: 400px;
-}
-
-/* Efecto de Borde Neón Giratorio (Hover) */
-.bento-item::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(transparent, #4cc9f0, transparent 30%);
-    animation: rotate-border 4s linear infinite;
+    opacity: 0.3;
     z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s;
+    pointer-events: none;
 }
 
-.bento-item::after {
-    content: '';
+#bg-video {
     position: absolute;
-    inset: 2px;
-    background: #0a0a0a;
-    border-radius: 26px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
     z-index: -1;
+    object-fit: cover;
+    filter: blur(10px) brightness(0.1);
 }
 
-.bento-item:hover {
-    transform: translateY(-10px);
-    border-color: rgba(76, 201, 240, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-}
-
-.bento-item:hover::before {
-    opacity: 1;
-}
-
-/* ==========================================================================
-   3. ESTILOS DE FORMULARIO (ESTÉTICA PRO)
-   ========================================================================== */
 #form {
     width: 380px;
     padding: 50px 40px;
@@ -164,7 +74,7 @@
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 10;
     transition: all 0.5s ease;
 }
 
@@ -180,7 +90,13 @@
     font-weight: 900;
     font-size: 48px;
     letter-spacing: -2px;
-    line-height: 0.9;
+    line-height: 1.2;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 #welcome-line-2 {
@@ -189,18 +105,16 @@
     font-size: 22px;
     letter-spacing: -1px;
     line-height: 1.2;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 40px;
     max-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-        opacity: 0.9;
-
+    text-align: center;
+    opacity: 0.9;
 }
 
 .form-inp {
     margin-bottom: 20px;
-    width: 100%;
+    width: 300px;
 }
 
 .form-inp input {
@@ -224,25 +138,26 @@
 
 #submit-button {
     width: 100%;
-    color: #fff;
+    color: #fff !important;
     background: linear-gradient(135deg, #4cc9f0, #7209b7);
-    font-weight: 800;
-    padding: 18px;
-    border-radius: 14px;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 22px;
+    border-radius: 18px;
     border: 0;
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(72, 9, 183, 0.3);
 }
 
 #submit-button:hover {
-    box-shadow: 0 0 30px rgba(76, 201, 240, 0.4);
-    filter: brightness(1.1);
-    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(76, 201, 240, 0.5);
+    filter: brightness(1.2);
+    transform: scale(1.02) translateY(-2px);
 }
 
-/* Barra de Energía Inferior */
 #bar {
     background: linear-gradient(90deg, #4cc9f0, #7209b7);
     width: 60px;
@@ -253,16 +168,24 @@
     box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
 }
 
-/* ==========================================================================
-   4. ANIMACIONES ADICIONALES
-   ========================================================================== */
-@keyframes rotate-border {
-    from {
-        transform: rotate(0deg);
+@keyframes constellation-rush {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
     }
 
-    to {
-        transform: rotate(360deg);
+    10% {
+        opacity: 0.6;
+    }
+
+    25% {
+        transform: translate(30%, 30%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(100%, 100%);
+        opacity: 0;
     }
 }
 
@@ -278,24 +201,39 @@
     }
 }
 
-/* Astronauta Flotante */
-.floating-img {
-    position: absolute;
-    bottom: 30px;
-    right: 40px;
-    height: 120px;
-    filter: drop-shadow(0 0 25px rgba(76, 201, 240, 0.5));
-    animation: float-dna 6s ease-in-out infinite;
+#forgot-pass a {
+    color: #b3b3b3;
+    font-size: 13px;
+    text-decoration: none;
+    margin-top: 15px;
+    display: block;
+    transition: color 0.3s;
 }
 
-@keyframes float-dna {
+#forgot-pass a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
+.tabla-container-hero-wide {
+    margin-top: 50px;
+    width: 95%;
+    max-width: 1100px;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(25px);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    margin-bottom: 50px;
+}
 
-    50% {
-        transform: translateY(-25px) rotate(5deg);
-    }
+table {
+    width: 100%;
+}
+
+th,
+td {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
 }

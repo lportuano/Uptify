@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Hero } from "../../shared/hero/hero";
+import { Hero } from '../../shared/hero/hero';
 
 @Component({
   selector: 'app-registro',
@@ -7,6 +7,4 @@ import { Hero } from "../../shared/hero/hero";
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
-export class Registro {
-
-}
+export class Registro {}
