@@ -1,0 +1,23 @@
+/* Animación de la barra de carga característica de Uptify */
+.animate-uptify-bar {
+    width: 60px;
+    animation: charging 2s infinite alternate ease-in-out;
+}
+
+@keyframes charging {
+    from {
+        width: 40px;
+        opacity: 0.5;
+    }
+
+    to {
+        width: 100px;
+        opacity: 1;
+    }
+}
+
+/* Opcional: Asegurar que el componente ocupe toda la pantalla en el ruteo */
+:host {
+    display: block;
+    width: 100%;
+}
