@@ -1,4 +1,74 @@
-/* Animación de la barra de carga característica de Uptify */
+:host {
+    display: block;
+    width: 100%;
+}
+
+#form-ui {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000;
+    z-index: 1;
+}
+
+#form-ui.con-galaxia {
+    background-image: radial-gradient(circle at center, #110022 0%, #000 80%);
+}
+
+#form-ui.con-galaxia::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 50%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 10% 10%, #4cc9f0, transparent),
+        radial-gradient(1px 1px at 85% 85%, #7209b7, transparent);
+    background-size: 250px 250px;
+    opacity: 0.4;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#form-ui.con-galaxia::after {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    background-image:
+        linear-gradient(45deg, #fff, rgba(76, 201, 240, 0) 70%),
+        linear-gradient(45deg, #fff, rgba(114, 9, 183, 0) 70%);
+    background-repeat: no-repeat;
+    background-size: 1px 100px, 1px 80px;
+    background-position: 10% 10%, 80% 15%;
+    animation: constellation-rush 8s linear infinite;
+    opacity: 0.2;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    object-fit: cover;
+    filter: blur(8px) brightness(0.15);
+}
+
+@keyframes constellation-rush {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 0.6; }
+    25% { transform: translate(30%, 30%); opacity: 0; }
+    100% { transform: translate(100%, 100%); opacity: 0; }
+}
+
 .animate-uptify-bar {
     width: 60px;
     animation: charging 2s infinite alternate ease-in-out;
@@ -9,15 +79,8 @@
         width: 40px;
         opacity: 0.5;
     }
-
     to {
         width: 100px;
         opacity: 1;
     }
-}
-
-/* Opcional: Asegurar que el componente ocupe toda la pantalla en el ruteo */
-:host {
-    display: block;
-    width: 100%;
 }
