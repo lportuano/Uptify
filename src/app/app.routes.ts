@@ -12,4 +12,5 @@ export const routes: Routes = [
     { path: 'registro', component: Registro },
     { path: 'login', component: Login },
     { path: 'error', component: Error },
+    
 ];
