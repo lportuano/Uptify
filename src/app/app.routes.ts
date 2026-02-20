@@ -7,15 +7,21 @@ import { Error } from './shared/error/error';
 import { Perfil } from './features/perfil/perfil';
 import { Planes } from './features/planes/planes';
 import { authGuard } from './guard/auth-guard';
+import { childGuardGuard } from './guard/child-guard-guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
 
-    { path: 'conocenos', component: Conocenos },
+    { path: 'conocenos', component: Conocenos, canActivateChild:[childGuardGuard], children:[
+        { path: 'ver', component: Planes } ,
+    ]},
     { path: 'registro', component: Registro },
-    { path: 'login', component: LoginPage } ,// Usa el nuevo nombre de la clase
+    { path: 'login', component: LoginPage } ,
     { path: 'error', component: Error },
     { path: 'perfil', component: Perfil, canActivate: [authGuard] },
-    { path: 'planes', component: Planes },
     
+    { path: '', canActivateChild: [childGuardGuard], children: [
+        { path: 'planes', component: Planes },
+    ]
+},  
 ];
