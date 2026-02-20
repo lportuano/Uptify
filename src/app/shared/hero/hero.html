@@ -8,48 +8,39 @@
       <div id="welcome-lines">
         <div id="welcome-line-1">Uptify</div>
         <div id="welcome-line-2">
-          {{ editando ? 'Editando usuario' : subtitulo }}
+          {{ editando ? 'Editando usuario' : 'Crea tu cuenta' }}
         </div>
       </div>
 
       <div id="input-area">
-        <div class="form-inp" [style.display]="usuario ? 'block' : 'none'">
-          <input [(ngModel)]="nuevoUsuario.name" name="name" [placeholder]="usuario" type="text" required />
+        <div class="form-inp">
+          <input [(ngModel)]="nuevoUsuario.name" name="name" placeholder="Nombre de usuario" type="text" required />
         </div>
-        <div class="form-inp" [style.display]="correo ? 'block' : 'none'">
-          <input [(ngModel)]="nuevoUsuario.email" name="email" [placeholder]="correo" type="email" required />
+        <div class="form-inp">
+          <input [(ngModel)]="nuevoUsuario.email" name="email" placeholder="Correo electrónico" type="email" required />
         </div>
-        <div class="form-inp" [style.display]="contrasenia ? 'block' : 'none'">
-          <input [(ngModel)]="nuevoUsuario.password" name="password" [placeholder]="contrasenia" type="password"
-            required />
+        <div class="form-inp">
+          <input [(ngModel)]="nuevoUsuario.password" name="password" placeholder="Contraseña" type="password" required />
         </div>
-        <div class="form-inp" [style.display]="confirmarContrasenia ? 'block' : 'none'">
-          <input name="confirm" [placeholder]="confirmarContrasenia" type="password" />
+        <div class="form-inp" *ngIf="!editando">
+          <input name="confirm" placeholder="Confirma tu contraseña" type="password" required />
         </div>
       </div>
 
       <div id="submit-button-cvr">
         <button (click)="mensaje()" id="submit-button" type="submit">
-          {{ editando ? 'Actualizar' : textoBoton }}
+          {{ editando ? 'Actualizar' : 'Registrarse' }}
         </button>
-
-        @if (!confirmarContrasenia && !editando) {
-        <button (click)="irAPerfil()" id="perfil-button" type="button"
-          class="mt-2 text-[#4cc9f0] text-[10px] tracking-[3px] uppercase font-bold opacity-70 hover:opacity-100 transition-opacity">
-          Ver mi Perfil 👤
-        </button>
-        }
-
       </div>
       <div id="bar"></div>
     </div>
   </form>
+
   @if (mostrarTabla || editando) {
   <div class="tabla-container-hero-wide">
     <div class="p-6 border-b border-white/10 text-center">
-      <h3
-        class="text-2xl font-black tracking-widest bg-gradient-to-r from-[#4cc9f0] to-[#7209b7] bg-clip-text text-transparent uppercase">
-        Lista de usuarios registrados en Uptify
+      <h3 class="text-2xl font-black tracking-widest bg-gradient-to-r from-[#4cc9f0] to-[#7209b7] bg-clip-text text-transparent uppercase">
+        Lista de usuarios registrados
       </h3>
     </div>
 
@@ -60,43 +51,22 @@
             <th class="px-6 py-2">ID</th>
             <th class="px-6 py-2">Usuario</th>
             <th class="px-6 py-2">Correo</th>
-            <th class="px-6 py-2">Contraseña</th>
             <th class="px-6 py-2 text-center">Acciones</th>
           </tr>
         </thead>
         <tbody class="text-white/80">
           @for (usuario of listaUsuarios(); track usuario.id) {
           <tr class="bg-white/5 hover:bg-white/10 transition-all rounded-lg group">
-            <td class="px-6 py-3 font-mono text-[10px] text-[#7209b7]">
-              {{ usuario.id }}
-            </td>
-            <td class="px-6 py-3 font-bold text-sm text-white transition-colors group-hover:text-[#4cc9f0]">
-              {{ usuario.name }}
-            </td>
-            <td class="px-6 py-3 text-sm opacity-60 text-white">
-              {{ usuario.email }}
-            </td>
-            <td class="px-6 py-3 text-xs opacity-30 font-mono">
-              {{ usuario.password }}
-            </td>
+            <td class="px-6 py-3 font-mono text-[10px] text-[#7209b7]">{{ usuario.id }}</td>
+            <td class="px-6 py-3 font-bold text-sm text-white group-hover:text-[#4cc9f0]">{{ usuario.name }}</td>
+            <td class="px-6 py-3 text-sm opacity-60 text-white">{{ usuario.email }}</td>
             <td class="px-6 py-3 text-center space-x-6">
-              <button (click)="seleccionarParaEditar(usuario)"
-                class="hover:scale-150 transition-transform cursor-pointer" title="Editar">
-                ✏️
-              </button>
-              <button (click)="eliminarsuario(usuario.id!)"
-                class="hover:scale-150 transition-transform text-red-400 cursor-pointer" title="Eliminar">
-                🗑️
-              </button>
-            </td>
-          </tr>
-          } @empty {
-          <tr>
-            <td colspan="5" class="p-12 text-center text-white/30 italic">
-              <div class="flex flex-col items-center gap-2">
-                <span class="text-2xl animate-pulse">🛰️</span>
-                No hay tripulantes registrados en la red...
-              </div>
+              @if (servicioAuth.rolActual()==='ADMIN') {
+              <button (click)="seleccionarParaEditar(usuario)" class="hover:scale-150 transition-transform">✏️</button>
+              <button (click)="eliminarsuario(usuario.id!)" class="hover:scale-150 transition-transform text-red-400">🗑️</button>
+              }@else {
+                <span>🔐​</span>
+              }
             </td>
           </tr>
           }

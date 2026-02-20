@@ -1,0 +1,35 @@
+<div id="form-ui" class="con-galaxia">
+  <form (ngSubmit)="iniciarSesion()" id="form">
+    <div id="form-body">
+      
+      <div id="welcome-lines">
+        <div id="welcome-line-1">Uptify</div>
+        <div id="welcome-line-2">Inicia Sesión en el Sistema</div>
+      </div>
+
+      <div id="input-area">
+        <div class="form-inp">
+          <input [(ngModel)]="email" name="email" placeholder="Correo electrónico" type="email" required />
+        </div>
+
+        <div class="form-inp">
+          <input [(ngModel)]="password" name="password" placeholder="Tu contraseña" type="password" required />
+        </div>
+      </div>
+
+      <div id="submit-button-cvr">
+        <button id="submit-button" type="submit">
+          Iniciar sesion
+        </button>
+      </div>
+
+      <div id="forgot-pass" class="mt-4">
+        <button (click)="cerrarSesion()" type="button" class="text-[10px] text-gray-500 hover:text-red-400 transition-colors uppercase tracking-widest">
+          Cerrar sesión
+        </button>
+      </div>
+
+      <div id="bar"></div>
+    </div>
+  </form>
+</div>

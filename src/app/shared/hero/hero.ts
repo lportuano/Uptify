@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { UsuarioServicio } from '../../services/usuario-servicio';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-hero',
@@ -14,6 +15,12 @@ import { Router } from '@angular/router';
 export class Hero {
 
   private servicioUsuario = inject(UsuarioServicio);
+
+  public servicioAuth = inject(AuthService);
+
+  listaUsuarios = signal<Usuario[]>([]);
+
+  editando = false;
 
   private router = inject(Router);
 
@@ -26,14 +33,11 @@ export class Hero {
   @Input() textoBoton: string = '';
   @Input() mostrarTabla: boolean = true;
 
-  listaUsuarios = signal<Usuario[]>([]);
-
-  editando = false;
-
   nuevoUsuario: Usuario = {
     name: '',
     email: '',
     password: '',
+    rol: 'USUARIO'
   };
 
   ngOnInit() {
@@ -84,7 +88,7 @@ export class Hero {
   //metodo para limpiar los inputs (formulario)
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', password: '' };
+    this.nuevoUsuario = { name: '', email: '', password: '', rol:'USUARIO' };
   }
 
   /*guardar usuarios

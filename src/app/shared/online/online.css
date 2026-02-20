@@ -1,0 +1,147 @@
+/* CONTENEDOR DE LA IMAGEN (Tamaño Único) */
+.avatar-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover; /* Asegura que todas las fotos encajen igual */
+    border: 2px solid #ffffff; 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* PUNTO VERDE DE ONLINE */
+.avatar-wrapper.online::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: #44ff00;
+    border-radius: 50%;
+    border: 2px solid #000;
+    box-shadow: 0 0 10px #44ff00;
+}
+
+/* ESTILO DE LAS LETRAS */
+.friend-name {
+    display: block;
+    color: #ffffff !important; /* Blanco Brillante */
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Brillo sutil */
+}
+
+.friend-status {
+    color: #b3b3b3 !important; /* Gris Plata para el "Escuchando:" */
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.friend-status strong {
+    color: #00f2ff !important; /* El nombre de la canción en Cian Neón para resaltar */
+    font-weight: 600;
+}
+
+/* AJUSTE DEL ITEM */
+.friend-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05); /* Fondo oscuro translúcido */
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.friend-item:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ANIMACIÓN DE ONDA */
+.wave-animation {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 15px;
+    margin-left: auto; /* La empuja al final */
+}
+
+.wave-animation span {
+    width: 3px;
+    background: #00f2ff;
+    animation: wave 1s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { height: 5px; }
+    50% { height: 15px; }
+}
+
+.dynamic-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+    
+    /* Degradado animado */
+    background: linear-gradient(90deg, #ffffff, #a855f7, #00f2ff, #ffffff);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Animaciones: una para el color y otra para un pulso sutil */
+    animation: 
+        glowText 5s linear infinite,
+        pulseTitle 2s ease-in-out infinite;
+    
+    /* Sombra para profundidad sobre el negro */
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
+}
+
+/* Movimiento del degradado (Efecto brillo) */
+@keyframes glowText {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+/* Efecto de latido sutil */
+@keyframes pulseTitle {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 1;
+    }
+}
+
+.live-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ff0055; /* Rojo vibrante */
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px #ff0055;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
