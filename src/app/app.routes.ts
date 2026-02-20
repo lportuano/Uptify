@@ -18,8 +18,8 @@ export const routes: Routes = [
     ]},
     { path: 'registro', component: Registro },
     { path: 'login', component: LoginPage } ,
-    { path: 'error', component: Error },
-    { path: 'perfil', component: Perfil, canActivate: [authGuard], canMatch: [authMatchGuard] },
+    { path: 'error', component: Error, canActivate: [authGuard] },
+    { path: 'perfil', component: Perfil, canMatch: [authMatchGuard] },
     
     { path: '', canActivateChild: [childGuardGuard], children: [
         { path: 'planes', component: Planes },
