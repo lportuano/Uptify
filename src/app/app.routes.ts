@@ -8,6 +8,7 @@ import { Perfil } from './features/perfil/perfil';
 import { Planes } from './features/planes/planes';
 import { authGuard } from './guard/auth-guard';
 import { childGuardGuard } from './guard/child-guard-guard';
+import { authMatchGuard } from './guard/match-guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -18,7 +19,7 @@ export const routes: Routes = [
     { path: 'registro', component: Registro },
     { path: 'login', component: LoginPage } ,
     { path: 'error', component: Error },
-    { path: 'perfil', component: Perfil, canActivate: [authGuard] },
+    { path: 'perfil', component: Perfil, canActivate: [authGuard], canMatch: [authMatchGuard] },
     
     { path: '', canActivateChild: [childGuardGuard], children: [
         { path: 'planes', component: Planes },

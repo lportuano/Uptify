@@ -10,7 +10,11 @@
             <a routerLink="/conocenos" class="btn">Conocenos</a>
             <a routerLink="/login" class="btn">Iniciar sesión</a>
             <a routerLink="/registro" class="btn">Regístrate</a>
-            <a routerLink="/perfil" class="btn">Perfil</a>
+
+            @if (servicioAuth.sesionIniciada()) {
+                <a routerLink="/perfil" class="btn">Perfil</a>
+            }
+            
             <a routerLink="/planes" class="btn">Planes</a>
             <a routerLink="/error" class="btn">Ayuda</a>
         </div>

@@ -10,11 +10,13 @@ export class AuthService {
 
   private servicioUsuario = inject(UsuarioServicio);
 
-  //localstorage
-  sesionIniciada = signal<boolean>(localStorage.getItem('sesion') === 'true');
+  sesionIniciada = signal<boolean>(
+    typeof window !== 'undefined' ? localStorage.getItem('sesion') === 'true' : false
+  );
 
-  //Accedemos al rol del usuario
-  rolActual = signal<string | null>(localStorage.getItem('rol'));
+  rolActual = signal<string | null>(
+    typeof window !== 'undefined' ? localStorage.getItem('rol') : null
+  );
 
   login(email: string, password: string): Observable<boolean> {
     return this.servicioUsuario.getUsuario().pipe(

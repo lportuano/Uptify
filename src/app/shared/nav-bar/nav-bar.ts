@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,5 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nav-bar.css',
 })
 export class NavBar {
+
+  public servicioAuth = inject(AuthService)
+  private router = inject(Router);
 
 }
