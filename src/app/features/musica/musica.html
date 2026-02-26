@@ -30,7 +30,9 @@
             <div class="image-box">
                 <img [src]="item.cover" alt="Cover" loading="lazy">
                 <div class="overlay">
-                    <span>{{ (reproductor.src === item.preview && !reproductor.paused) ? '⏸' : '▶' }}</span>
+                    <span>
+                        {{ (reproductor.src === item.preview && !reproductor.paused) ? '⏸' : '▶' }}
+                    </span>
                 </div>
             </div>
             <div class="info">
@@ -40,4 +42,32 @@
         </div>
         }
     </div>
+
+    @if (cargando) {
+    <div class="loading-state">
+        <p>Sintonizando frecuencias...</p>
+    </div>
+    }
+</div> @if (cancionActual()) {
+<div class="reproductor-fijo">
+    <div class="track-info">
+        <img [src]="cancionActual().cover" alt="cover">
+        <div class="textos">
+            <span class="nombre">{{ cancionActual().titulo }}</span>
+            <span class="artista">{{ cancionActual().artista }}</span>
+        </div>
+    </div>
+
+    <div class="controles-audio">
+        <audio controls autoplay 
+               [src]="cancionActual().preview"
+               (play)="reproductor.play()" 
+               (pause)="reproductor.pause()">
+        </audio>
+    </div>
+
+    <div class="extra-info">
+        <span class="uptify-badge">Uptify High Fidelity 🔊</span>
+    </div>
 </div>
+}

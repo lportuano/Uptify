@@ -46,8 +46,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem('sesion');
     localStorage.removeItem('user');
-    this.sesionIniciada.set(false);
     localStorage.removeItem('rol');
+    
+    this.sesionIniciada.set(false);
     this.rolActual.set(null)
   }
 

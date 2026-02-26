@@ -36,11 +36,12 @@
     </div>
   </form>
 
-  @if (mostrarTabla || editando) {
+  @if (servicioAuth.rolActual() === 'ROLE_ADMIN' && (mostrarTabla || editando)) {
+  
   <div class="tabla-container-hero-wide">
     <div class="p-6 border-b border-white/10 text-center">
       <h3 class="text-2xl font-black tracking-widest bg-gradient-to-r from-[#4cc9f0] to-[#7209b7] bg-clip-text text-transparent uppercase">
-        Lista de usuarios registrados
+        Panel de Control: Usuarios
       </h3>
     </div>
 
@@ -61,12 +62,8 @@
             <td class="px-6 py-3 font-bold text-sm text-white group-hover:text-[#4cc9f0]">{{ usuario.nombre }}</td>
             <td class="px-6 py-3 text-sm opacity-60 text-white">{{ usuario.email }}</td>
             <td class="px-6 py-3 text-center space-x-6">
-              @if (servicioAuth.rolActual()==='ROLE_ADMIN') {
               <button (click)="seleccionarParaEditar(usuario)" class="hover:scale-150 transition-transform">✏️</button>
               <button (click)="eliminarsuario(usuario.id!)" class="hover:scale-150 transition-transform text-red-400">🗑️</button>
-              }@else {
-                <span>🔐​</span>
-              }
             </td>
           </tr>
           }
@@ -74,5 +71,12 @@
       </table>
     </div>
   </div>
+
+  } 
+  
+  @else if (servicioAuth.rolActual() !== 'ROLE_ADMIN' && mostrarTabla) {
+    <div class="p-4 text-center mt-4">
+    </div>
   }
+
 </div>

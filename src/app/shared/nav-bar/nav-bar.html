@@ -12,21 +12,27 @@
                 <a routerLink="/" class="btn">Home</a>
                 <a routerLink="/conocenos" class="btn">Conocenos</a>
                 <a routerLink="/planes" class="btn">Planes</a>
-                
 
                 @if (!servicioAuth.sesionIniciada()) {
                 <a routerLink="/login" class="btn">Login</a>
-                <a routerLink="/registro" class="btn">Registro</a>
-                } @else {
+                }
+
+                @if (!servicioAuth.sesionIniciada() || servicioAuth.rolActual() === 'ROLE_ADMIN') {
+                <a routerLink="/registro" class="btn">
+                    {{ servicioAuth.rolActual() === 'ROLE_ADMIN' ? 'Gestión Usuarios' : 'Registro' }}
+                </a>
+                }
+
+                @if (servicioAuth.sesionIniciada()) {
                 <a routerLink="/perfil" class="btn">Perfil</a>
+
+                <a routerLink="/musica" class="btn">Música</a>
+
                 <button (click)="cerrarSesion()" type="button" class="btn-logout">
                     <span class="icon">⏻</span>
                     <span class="text">Salir</span>
                 </button>
                 }
-                <a routerLink="/error" class="btn">Ayuda</a>
-
-                <a routerLink="/musica" class="btn">Música</a>
             </div>
         </div>
     </div>

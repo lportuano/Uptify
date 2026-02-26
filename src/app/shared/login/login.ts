@@ -22,16 +22,22 @@ export class Login {
     this.servicioAuth.login(this.email, this.password).subscribe(success =>{
       if(success){
         alert('Bienvenido al sistema');
+      if (this.servicioAuth.rolActual() === 'ROLE_ADMIN') {
+        this.router.navigate(['/registro']);
+      } else {
         this.router.navigate(['/perfil']);
-      }else{
-        alert('Error: usuario no autenticado');
       }
-    });
+      
+    } else {
+      alert('Error: usuario no autenticado');
+    }
+  });
   }
 
   cerrarSesion(){
     this.servicioAuth.logout();
     alert('Sesion cerrada');
+    this.router.navigate(['/']);
   }
 
 }

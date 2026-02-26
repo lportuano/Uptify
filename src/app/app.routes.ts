@@ -14,15 +14,26 @@ import { Musica } from './features/musica/musica';
 export const routes: Routes = [
 
     { path: '', component: Home },
-    { path: 'musica', component: Musica },
     { path: 'registro', component: Registro },
     { path: 'login', component: LoginPage },
 
+    {
+        path: 'admin-usuarios',
+        component: Registro,
+        canMatch: [authMatchGuard],
+        data: { role: 'ROLE_ADMIN' }
+    },
 
     {
-        path: 'conocenos', 
-        component: Conocenos, 
-        canActivateChild: [childGuardGuard], 
+        path: 'musica',
+        component: Musica,
+        canMatch: [authMatchGuard]
+    },
+
+    {
+        path: 'conocenos',
+        component: Conocenos,
+        canActivateChild: [childGuardGuard],
         children: [
             { path: 'ver', component: Planes },
         ]
@@ -34,12 +45,13 @@ export const routes: Routes = [
 
 
     {
-        path: '', 
-        canActivateChild: [childGuardGuard], 
+        path: '',
+        canActivateChild: [childGuardGuard],
         children: [
             { path: 'planes', component: Planes },
         ]
     },
 
+    { path: '**', component: Error }
 
 ];

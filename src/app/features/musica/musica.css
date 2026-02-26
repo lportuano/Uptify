@@ -1,7 +1,6 @@
 /* 1. AJUSTE DE POSICIÓN: Bajamos todo para que no lo tape el Navbar */
 .musica-wrapper {
-    padding: 130px 40px 40px 40px;
-    /* Aumentamos el padding superior */
+    padding: 130px 40px 140px 40px; /* Aumentamos el padding inferior para que el reproductor no tape las cards */
     background: transparent;
     min-height: 100vh;
     display: flex;
@@ -17,9 +16,7 @@
     flex-direction: column;
     align-items: center;
     gap: 25px;
-    /* Espacio uniforme entre elementos */
     margin-bottom: 60px;
-    /* Espacio antes de las cards */
 }
 
 /* TÍTULO: Centrado y sin margen que lo empuje */
@@ -82,7 +79,7 @@
     box-shadow: 0 0 15px #4cc9f0;
 }
 
-/* BOTONES DE GÉNERO (CHIPS): Ahora con espacio real */
+/* BOTONES DE GÉNERO (CHIPS) */
 .genre-chips {
     display: flex;
     gap: 12px;
@@ -111,7 +108,7 @@
 }
 
 /* ----------------------------------------------------------- */
-/* TUS CARDS ORIGINALES (MANTENIDAS EXACTAMENTE IGUAL)        */
+/* TUS CARDS ORIGINALES */
 /* ----------------------------------------------------------- */
 .grid-container {
     display: grid;
@@ -188,4 +185,78 @@
 .info p {
     color: #b3b3b3;
     font-size: 13px;
+}
+
+/* ----------------------------------------------------------- */
+/* NUEVOS ESTILOS PARA EL REPRODUCTOR (AÑADIDOS)               */
+/* ----------------------------------------------------------- */
+
+.reproductor-fijo {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 2px solid #7209b7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease-out;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.track-info img {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    margin-right: 15px;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+}
+
+.textos {
+    display: flex;
+    flex-direction: column;
+}
+
+.nombre {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.artista {
+    color: #4cc9f0;
+    font-size: 12px;
+}
+
+.controles-audio audio {
+    width: 500px;
+    height: 40px;
+    filter: invert(1) hue-rotate(180deg) brightness(1.5); /* Estilo neón para el audio */
+}
+
+.uptify-badge {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    font-size: 10px;
+    background: linear-gradient(90deg, #7209b7, #4cc9f0);
+    padding: 5px 12px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }

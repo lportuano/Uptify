@@ -14,10 +14,11 @@ export class NavBar {
   private router = inject(Router);
 
 
-  cerrarSesion() {
-    this.servicioAuth.logout();
-    alert('Sesion cerrada');
-  }
+cerrarSesion() {
+  this.servicioAuth.logout();
+  alert('Sesión cerrada correctamente');
+  this.router.navigate(['/']);
+}
 
 
 }
