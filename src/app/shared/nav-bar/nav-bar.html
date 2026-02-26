@@ -1,22 +1,33 @@
-<div class="nav">
+<nav class="nav">
     <div class="container">
         <a routerLink="/" class="logo-container">
-            <img src="up.png" alt="Uptify" class="logo-img">
+            <div class="img-wrapper">
+                <img src="up.png" alt="Uptify" class="logo-img">
+            </div>
             <span class="logo-text">Uptify</span>
         </a>
 
-        <div class="menu-links">
-            <a routerLink="/" class="btn">Home</a>
-            <a routerLink="/conocenos" class="btn">Conocenos</a>
-            <a routerLink="/login" class="btn">Iniciar sesión</a>
-            <a routerLink="/registro" class="btn">Regístrate</a>
+        <div class="menu-group">
+            <div class="menu-links">
+                <a routerLink="/" class="btn">Home</a>
+                <a routerLink="/conocenos" class="btn">Conocenos</a>
+                <a routerLink="/planes" class="btn">Planes</a>
+                
 
-            @if (servicioAuth.sesionIniciada()) {
+                @if (!servicioAuth.sesionIniciada()) {
+                <a routerLink="/login" class="btn">Login</a>
+                <a routerLink="/registro" class="btn">Registro</a>
+                } @else {
                 <a routerLink="/perfil" class="btn">Perfil</a>
-            }
-            
-            <a routerLink="/planes" class="btn">Planes</a>
-            <a routerLink="/error" class="btn">Ayuda</a>
+                <button (click)="cerrarSesion()" type="button" class="btn-logout">
+                    <span class="icon">⏻</span>
+                    <span class="text">Salir</span>
+                </button>
+                }
+                <a routerLink="/error" class="btn">Ayuda</a>
+
+                <a routerLink="/musica" class="btn">Música</a>
+            </div>
         </div>
     </div>
-</div>
+</nav>

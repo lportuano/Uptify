@@ -13,4 +13,11 @@ export class NavBar {
   public servicioAuth = inject(AuthService)
   private router = inject(Router);
 
+
+  cerrarSesion() {
+    this.servicioAuth.logout();
+    alert('Sesion cerrada');
+  }
+
+
 }

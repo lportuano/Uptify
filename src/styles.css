@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+/* Limpiamos el fondo de la aplicación para que sea negro galáctico */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #050505; /* Fondo ultra oscuro */
+    color: white;
+    overflow-x: hidden; /* Evita scrolls horizontales raros */
+}
+
+/* Si tu contenido principal se sube demasiado, dale un empujón hacia abajo */
+app-root {
+    display: block;
+    padding-top: 40px; 
+}

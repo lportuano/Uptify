@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self'; connect-src 'self' http://localhost:* ws://localhost:* https://itunes.apple.com; img-src 'self' data: https://*.mzstatic.com https://*; media-src 'self' https://audio-ssl.itunes.apple.com https://*.itunes.apple.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com;

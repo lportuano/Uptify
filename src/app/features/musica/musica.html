@@ -1,0 +1,43 @@
+<div class="musica-wrapper">
+    <div class="header-musica">
+        <h2 class="title">Uptify Explorer</h2>
+
+        <div class="search-box">
+            <input type="text" [(ngModel)]="terminoBusqueda" (keyup.enter)="ejecutarBusqueda()"
+                placeholder="Busca artistas, canciones o géneros...">
+
+            <button class="search-btn" (click)="ejecutarBusqueda()">
+                <div class="icon-wrapper">
+                    <i class="fas fa-search"></i>
+                </div>
+            </button>
+        </div>
+
+        <div class="genre-chips">
+            <button (click)="cargarMusicaInicial()">Top 200</button>
+            <button (click)="filtrarPorGenero('Rock')">Rock</button>
+            <button (click)="filtrarPorGenero('Pop')">Pop</button>
+            <button (click)="filtrarPorGenero('Trap')">Trap</button>
+            <button (click)="filtrarPorGenero('Lo-fi')">Lo-fi</button>
+            <button (click)="filtrarPorGenero('Phonk')">Phonk</button>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        @for (item of listaMusica; track $index) {
+        <div class="card" (click)="controlarMusica(item)"
+            [class.active]="reproductor.src === item.preview && !reproductor.paused">
+            <div class="image-box">
+                <img [src]="item.cover" alt="Cover" loading="lazy">
+                <div class="overlay">
+                    <span>{{ (reproductor.src === item.preview && !reproductor.paused) ? '⏸' : '▶' }}</span>
+                </div>
+            </div>
+            <div class="info">
+                <h3>{{ item.titulo }}</h3>
+                <p>{{ item.artista }}</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
