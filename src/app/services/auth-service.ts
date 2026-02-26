@@ -2,6 +2,8 @@ import { inject, Injectable, signal } from '@angular/core';
 import { getAuth } from 'firebase/auth';
 import { UsuarioServicio } from './usuario-servicio';
 import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,7 @@ import { map, Observable } from 'rxjs';
 export class AuthService {
 
   private servicioUsuario = inject(UsuarioServicio);
+  private http = inject(HttpClient);
 
   sesionIniciada = signal<boolean>(
     typeof window !== 'undefined' ? localStorage.getItem('sesion') === 'true' : false
@@ -18,10 +21,11 @@ export class AuthService {
     typeof window !== 'undefined' ? localStorage.getItem('rol') : null
   );
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.servicioUsuario.getUsuario().pipe(
-      map(usuarios => {
-        const usuarioCoincide = usuarios.find(u => u.email === email && u.password === password);
+  private API_URL = 'http://localhost:8080/login';
+
+  login(email: string, passw: string): Observable<boolean> {
+    return this.http.post<Usuario | null>(this.API_URL,{email, password: passw}).pipe(
+      map(usuarioCoincide => {
         if(usuarioCoincide){
           localStorage.setItem('sesion', 'true');
           //guardar los datos convirtiendo el objeto json a texto

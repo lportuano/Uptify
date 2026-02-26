@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Login {
 
-  email:string='';
+  email:string='';  
   password:string='';
 
   private servicioAuth = inject(AuthService);

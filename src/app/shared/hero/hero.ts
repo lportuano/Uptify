@@ -34,10 +34,10 @@ export class Hero {
   @Input() mostrarTabla: boolean = true;
 
   nuevoUsuario: Usuario = {
-    name: '',
+    nombre: '',
     email: '',
     password: '',
-    rol: 'USUARIO'
+    rol: 'ROLE_USUARIO'
   };
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class Hero {
   }
 
   //metodo ELIMINAR
-  eliminarsuario(id: string) {
+  eliminarsuario(id: number) {
     if (confirm('¿Desea eliminar el registro ?')) {
       this.servicioUsuario.deleteUsuario(id).subscribe(() => {
         this.obtener();
@@ -88,7 +88,7 @@ export class Hero {
   //metodo para limpiar los inputs (formulario)
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', password: '', rol:'USUARIO' };
+    this.nuevoUsuario = { nombre: '', email: '', password: '', rol:'ROLE_USUARIO' };
   }
 
   /*guardar usuarios
