@@ -57,3 +57,77 @@
     position: relative;
     z-index: 10;
 }
+
+/* ... Manten tus estilos anteriores de estrellas y wrapper ... */
+
+.plan-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px 15px;
+    border-radius: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card:hover {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.5);
+    transform: translateY(-5px);
+}
+
+.plan-card.active-plan {
+    background: linear-gradient(145deg, rgba(168, 85, 247, 0.2), rgba(6, 182, 212, 0.2));
+    border-color: #a855f7;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+}
+
+.plan-price {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.plan-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #a855f7;
+}
+
+.plan-desc {
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-top: 10px;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    background: #06b6d4;
+    color: black;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 25px;
+    transform: rotate(45deg);
+}
+
+/* EFECTO DE LUZ NEBULOSA EN EL CENTRO */
+.formulario-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+}

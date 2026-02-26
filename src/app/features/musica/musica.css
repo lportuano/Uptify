@@ -1,6 +1,6 @@
 /* 1. AJUSTE DE POSICIÓN: Bajamos todo para que no lo tape el Navbar */
 .musica-wrapper {
-    padding: 130px 40px 140px 40px; /* Aumentamos el padding inferior para que el reproductor no tape las cards */
+    padding: 130px 40px 140px 40px;
     background: transparent;
     min-height: 100vh;
     display: flex;
@@ -19,7 +19,6 @@
     margin-bottom: 60px;
 }
 
-/* TÍTULO: Centrado y sin margen que lo empuje */
 .title {
     font-family: 'Orbitron', sans-serif;
     color: #4cc9f0;
@@ -30,7 +29,6 @@
     text-shadow: 0 0 15px rgba(76, 201, 240, 0.6);
 }
 
-/* BUSCADOR: Estilo cápsula futurista */
 .search-box {
     display: flex;
     align-items: center;
@@ -58,7 +56,6 @@
     font-size: 16px;
 }
 
-/* BOTÓN DE BÚSQUEDA: Circular y Neón */
 .search-btn {
     background: linear-gradient(135deg, #7209b7, #4cc9f0);
     border: none;
@@ -79,7 +76,6 @@
     box-shadow: 0 0 15px #4cc9f0;
 }
 
-/* BOTONES DE GÉNERO (CHIPS) */
 .genre-chips {
     display: flex;
     gap: 12px;
@@ -107,9 +103,7 @@
     transform: translateY(-2px);
 }
 
-/* ----------------------------------------------------------- */
-/* TUS CARDS ORIGINALES */
-/* ----------------------------------------------------------- */
+/* 3. GRID DE CANCIONES */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -187,76 +181,237 @@
     font-size: 13px;
 }
 
-/* ----------------------------------------------------------- */
-/* NUEVOS ESTILOS PARA EL REPRODUCTOR (AÑADIDOS)               */
-/* ----------------------------------------------------------- */
-
+/* 4. REPRODUCTOR FIJO */
 .reproductor-fijo {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(20px);
-    border-top: 2px solid #7209b7;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    height: 90px;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(76, 201, 240, 0.2);
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
-    z-index: 9999; /* Asegura que esté por encima de todo */
-    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
-    animation: slideUp 0.4s ease-out;
+    padding: 0 30px;
+    z-index: 9999;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(114, 9, 183, 0.2);
+    animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glow-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(114, 9, 183, 0.3), transparent 70%);
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .track-info {
     display: flex;
     align-items: center;
-    width: 30%;
+    gap: 15px;
+    min-width: 250px;
 }
 
-.track-info img {
-    width: 65px;
-    height: 65px;
-    border-radius: 10px;
-    margin-right: 15px;
-    border: 1px solid rgba(76, 201, 240, 0.3);
+.img-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
 }
 
-.textos {
+.img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.playing-bars {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
     display: flex;
-    flex-direction: column;
+    gap: 2px;
 }
 
-.nombre {
+.playing-bars span {
+    width: 3px;
+    height: 8px;
+    background: #4cc9f0;
+    animation: bounce 0.8s ease-in-out infinite;
+}
+
+.textos .nombre {
+    display: block;
     color: white;
     font-family: 'Orbitron', sans-serif;
     font-size: 14px;
-    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.artista {
+.textos .artista {
     color: #4cc9f0;
     font-size: 12px;
 }
 
 .controles-audio audio {
-    width: 500px;
-    height: 40px;
-    filter: invert(1) hue-rotate(180deg) brightness(1.5); /* Estilo neón para el audio */
+    width: 400px;
+    height: 35px;
+    filter: invert(1) hue-rotate(180deg) brightness(1.5);
+}
+
+.extra-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .uptify-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: 'Orbitron', sans-serif;
     color: white;
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 15px;
+    border-radius: 50px;
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* 5. SISTEMA DE ANUNCIOS (CORREGIDO: FUERA DEL MEDIA QUERY) */
+.anuncio-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 100000;
+    /* Aseguramos que esté por encima de todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.anuncio-content {
+    background: #0f0f1a;
+    border: 2px solid #7209b7;
+    padding: 40px;
+    border-radius: 35px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 50px rgba(114, 9, 183, 0.4);
+    animation: zoomIn 0.3s ease-out;
+}
+
+.anuncio-tag {
     font-size: 10px;
+    color: #4cc9f0;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.anuncio-info h2 {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+}
+
+.anuncio-info span {
+    color: #7209b7;
+    font-weight: bold;
+}
+
+.promo-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.btn-upgrade {
+    width: 100%;
+    padding: 15px;
     background: linear-gradient(90deg, #7209b7, #4cc9f0);
-    padding: 5px 12px;
-    border-radius: 5px;
-    letter-spacing: 1px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.btn-skip {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #b3b3b3;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ANIMACIONES Y RESPONSIVE */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        height: 5px;
+    }
+
+    50% {
+        height: 15px;
+    }
 }
 
 @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translate(-50%, 150%);
+    }
+
+    to {
+        transform: translate(-50%, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    .controles-audio audio {
+        width: 150px;
+    }
+
+    .extra-actions {
+        display: none;
+    }
 }

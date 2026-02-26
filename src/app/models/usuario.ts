@@ -3,5 +3,6 @@ export interface Usuario {
     nombre: string;
     email: string;
     password: string;
+    
     rol: 'ROLE_ADMIN' | 'ROLE_USUARIO';
 }

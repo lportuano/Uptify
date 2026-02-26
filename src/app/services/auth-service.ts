@@ -24,17 +24,19 @@ export class AuthService {
   private API_URL = 'http://localhost:8080/login';
 
   login(email: string, passw: string): Observable<boolean> {
-    return this.http.post<Usuario | null>(this.API_URL,{email, password: passw}).pipe(
+    return this.http.post<Usuario | null>(this.API_URL, { email, password: passw }).pipe(
       map(usuarioCoincide => {
-        if(usuarioCoincide){
+        if (usuarioCoincide) {
           localStorage.setItem('sesion', 'true');
-          //guardar los datos convirtiendo el objeto json a texto
           localStorage.setItem('user', JSON.stringify(usuarioCoincide));
-
-          //guardar el ROL
           localStorage.setItem('rol', usuarioCoincide.rol);
+
+          // Guardar en postgree datos
+          if (usuarioCoincide.id) {
+            localStorage.setItem('usuarioId', usuarioCoincide.id.toString());
+          }
+
           this.rolActual.set(usuarioCoincide.rol);
-          
           this.sesionIniciada.set(true);
           return true;
         }
@@ -47,9 +49,10 @@ export class AuthService {
     localStorage.removeItem('sesion');
     localStorage.removeItem('user');
     localStorage.removeItem('rol');
-    
+    localStorage.removeItem('usuarioId');
+
     this.sesionIniciada.set(false);
-    this.rolActual.set(null)
+    this.rolActual.set(null);
   }
 
 }

@@ -3,20 +3,23 @@ import { Home } from './features/home/home';
 import { Registro } from './features/registro/registro';
 import { LoginPage } from './features/login/login';
 import { Conocenos } from './features/conocenos/conocenos';
-import { Error } from './shared/error/error';
+
 import { Perfil } from './features/perfil/perfil';
-import { Planes } from './features/planes/planes';
+import { Planes } from './features/planes/planes'; // Componente que carga el FormularioPlan
+import { Musica } from './features/musica/musica';
+
+// Guards
 import { authGuard } from './guard/auth-guard';
 import { childGuardGuard } from './guard/child-guard-guard';
 import { authMatchGuard } from './guard/match-guard';
-import { Musica } from './features/musica/musica';
 
 export const routes: Routes = [
-
+    // --- RUTAS PÚBLICAS ---
     { path: '', component: Home },
     { path: 'registro', component: Registro },
     { path: 'login', component: LoginPage },
 
+    // --- RUTAS PROTEGIDAS POR ROL (ADMIN) ---
     {
         path: 'admin-usuarios',
         component: Registro,
@@ -24,6 +27,7 @@ export const routes: Routes = [
         data: { role: 'ROLE_ADMIN' }
     },
 
+    // --- RUTAS PROTEGIDAS POR SESIÓN ---
     {
         path: 'musica',
         component: Musica,
@@ -31,27 +35,27 @@ export const routes: Routes = [
     },
 
     {
+        path: 'perfil',
+        component: Perfil,
+        canMatch: [authMatchGuard]
+    },
+
+    // --- RUTA DE PLANES  ---
+    {
+        path: 'planes',
+        component: Planes , canMatch: [authMatchGuard]
+
+    },
+
+    // --- RUTAS CON HIJOS ---
+    {
         path: 'conocenos',
         component: Conocenos,
         canActivateChild: [childGuardGuard],
         children: [
-            { path: 'ver', component: Planes },
+            { path: 'ver', component: Planes }, 
         ]
     },
 
-
-    { path: 'perfil', component: Perfil, canMatch: [authMatchGuard] },
-    { path: 'error', component: Error, canActivate: [authGuard] },
-
-
-    {
-        path: '',
-        canActivateChild: [childGuardGuard],
-        children: [
-            { path: 'planes', component: Planes },
-        ]
-    },
-
-    { path: '**', component: Error }
 
 ];

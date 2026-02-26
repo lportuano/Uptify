@@ -1,0 +1,18 @@
+--1.COPIA ESTO AL POSTGREE Y EJECUTALO (si no sabes como ejecutar ahi t deje la imagen tonta /postgree.png )
+
+TRUNCATE TABLE plan CASCADE; 
+
+INSERT INTO plan (nombre, precio) VALUES ('Gratuito', 0.0);
+INSERT INTO plan (nombre, precio) VALUES ('Premium', 9.99);
+INSERT INTO plan (nombre, precio) VALUES ('Familiar', 14.99);
+
+SELECT * FROM plan;
+
+--2. CREA EL USUARIO POR DEFECTO VA COMO USUARIO GRATUITO (Prueba aqui para q veas los anuncios)
+
+--3 SI NO QUIERES VER ANUNCIOS CUANDO REPRODUCES CUALQUIER MUSICA COMPRA UNA SUSCRIPCION EN PLANES , 
+CIERRA SESION Y VUELVE A ABRIR PARA QUE SE ACTUALICE LA SUSCRIPCION
+
+--4.  ROY HTA APRENDERAS :v
+
+

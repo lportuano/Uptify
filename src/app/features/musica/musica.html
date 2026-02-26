@@ -48,10 +48,19 @@
         <p>Sintonizando frecuencias...</p>
     </div>
     }
-</div> @if (cancionActual()) {
+</div>
+
+@if (cancionActual()) {
 <div class="reproductor-fijo">
+    <div class="glow-bg"></div>
+
     <div class="track-info">
-        <img [src]="cancionActual().cover" alt="cover">
+        <div class="img-container">
+            <img [src]="cancionActual().cover" alt="cover">
+            <div class="playing-bars">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
         <div class="textos">
             <span class="nombre">{{ cancionActual().titulo }}</span>
             <span class="artista">{{ cancionActual().artista }}</span>
@@ -59,15 +68,42 @@
     </div>
 
     <div class="controles-audio">
-        <audio controls autoplay 
-               [src]="cancionActual().preview"
-               (play)="reproductor.play()" 
-               (pause)="reproductor.pause()">
+        <audio #audioPlayer controls autoplay [src]="cancionActual().preview" (play)="reproductor.play()"
+            (pause)="reproductor.pause()">
         </audio>
     </div>
 
-    <div class="extra-info">
-        <span class="uptify-badge">Uptify High Fidelity 🔊</span>
+    <div class="extra-actions">
+        <div class="uptify-badge">
+            <span class="dot"></span>
+            HIGH FIDELITY
+        </div>
+        <button class="btn-close" (click)="cancionActual.set(null)">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
+}
+
+@if (mostrarAnuncio()) {
+<div class="anuncio-overlay">
+    <div class="anuncio-content">
+        <div class="anuncio-tag">Publicidad Espacial</div>
+
+        <div class="anuncio-info">
+            <h2>Interrupción de señal</h2>
+            <p>Los usuarios <span>Premium</span> no MIRAN esto.</p>
+
+            <div class="promo-box">
+                <i class="fas fa-rocket"></i>
+                <p>Obtén Uptify Premium por $9.99</p>
+            </div>
+        </div>
+
+        <div class="anuncio-actions">
+            <button class="btn-upgrade" routerLink="/planes">MEJORAR PLAN</button>
+            <button class="btn-skip" (click)="saltarAnuncio()">Continuar a la música</button>
+        </div>
     </div>
 </div>
 }

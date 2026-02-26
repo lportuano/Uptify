@@ -7,7 +7,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root',
 })
 export class UsuarioServicio {
-  
+
   private http = inject(HttpClient);
 
   private API_URL = 'http://localhost:8080/usuarios';
@@ -48,5 +48,11 @@ export class UsuarioServicio {
   //metodo DELETE
   deleteUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}`);
+  }
+
+  actualizarSuscripcion(id: number, nombrePlan: string): Observable<any> {
+
+    const body = { nombrePlan: nombrePlan };
+    return this.http.put<any>(`${this.API_URL}/${id}/plan`, body);
   }
 }

@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { MusicaService } from '../../services/musica-service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-musica',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './musica.html',
   styleUrl: './musica.css',
 })
@@ -14,19 +15,17 @@ export class Musica implements OnInit {
   private musicaService = inject(MusicaService);
 
   listaMusica: any[] = [];
-  
-  /** * OBJETO ESPEJO: 
-   * Lo ponemos en volumen 0. No emite sonido, solo sirve para que 
-   * las cards sepan qué canción está activa y si deben mostrar ▶ o ⏸.
-   */
   reproductor = new Audio();
-
   cancionActual = signal<any>(null);
+
+  mostrarAnuncio = signal<boolean>(false);
+  cancionEnEspera: any = null;
+
   terminoBusqueda: string = '';
   cargando: boolean = false;
 
   ngOnInit() {
-    this.reproductor.volume = 0; // Silencio absoluto para evitar el eco
+    this.reproductor.volume = 0;
     this.cargarMusicaInicial();
   }
 
@@ -68,26 +67,51 @@ export class Musica implements OnInit {
   }
 
   controlarMusica(cancion: any) {
-    // 1. Si es la misma canción que ya está en el sistema
-    if (this.reproductor.src === cancion.preview) {
-      if (this.reproductor.paused) {
-        this.reproductor.play(); // Sincroniza icono a ⏸
-      } else {
-        this.reproductor.pause(); // Sincroniza icono a ▶
+    const userJson = localStorage.getItem('user');
+    let planNombre = 'Gratuito';
+
+    if (userJson) {
+      try {
+        const userData = JSON.parse(userJson);
+        planNombre = userData.plan?.nombre || 'Gratuito';
+      } catch (e) {
+        planNombre = 'Gratuito';
       }
-      return; 
     }
 
-    // 2. Si es una canción nueva:
-    // Detenemos el objeto espejo anterior
+    if (planNombre === 'Gratuito' && this.reproductor.src !== cancion.preview) {
+      this.cancionEnEspera = cancion;
+      this.mostrarAnuncio.set(true); // Se activa el modal
+      return;
+    }
+
+    this.ejecutarReproduccion(cancion);
+  }
+
+  saltarAnuncio() {
+    const cancionParaReproducir = this.cancionEnEspera;
+    this.mostrarAnuncio.set(false); // Cerramos modal
+    this.cancionEnEspera = null;
+
+    if (cancionParaReproducir) {
+      this.ejecutarReproduccion(cancionParaReproducir); // ¡Aquí suena la música!
+    }
+  }
+
+  ejecutarReproduccion(cancion: any) {
+    if (this.reproductor.src === cancion.preview) {
+      if (this.reproductor.paused) {
+        this.reproductor.play();
+      } else {
+        this.reproductor.pause();
+      }
+      return;
+    }
+
     this.reproductor.pause();
     this.reproductor.src = cancion.preview;
     this.reproductor.load();
-
-    // Activamos el reproductor visual del HTML mediante el Signal
     this.cancionActual.set(cancion);
-
-    // Arrancamos el objeto espejo (en silencio) para que la card se ponga en modo "active"
-    this.reproductor.play().catch(() => {});
+    this.reproductor.play().catch(() => { });
   }
 }
