@@ -22,7 +22,7 @@ export class Planes {
   @Input() listaPlanes: Plan[] = [
     {
       nombre: 'Gratis',
-      precio: '5.99',
+      precio: '0.00',
       recomendado: false,
       textoBoton: 'Empezar gratis',
       ruta: '/registro',  

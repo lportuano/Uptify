@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
@@ -11,30 +11,41 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Login {
 
-  email:string='';  
-  password:string='';
+  email: string = '';
+  password: string = '';
 
   private servicioAuth = inject(AuthService);
 
   private router = inject(Router)
 
-  iniciarSesion(){
-    this.servicioAuth.login(this.email, this.password).subscribe(success =>{
-      if(success){
-        alert('Bienvenido al sistema');
-      if (this.servicioAuth.rolActual() === 'ROLE_ADMIN') {
-        this.router.navigate(['/registro']);
-      } else {
-        this.router.navigate(['/perfil']);
-      }
-      
-    } else {
-      alert('Error: usuario no autenticado');
-    }
-  });
+  // El rol ya no lo leeremos de una clave 'rol', sino que podrías extraerlo del token (JWT) si fuera necesario
+  rolActual = signal<string | null>(null);
+
+
+  iniciarSesion() {
+    this.servicioAuth.login(this.email, this.password).subscribe({
+
+      //Se activa si la respuesta de la api fue 200 OK.
+      next: (res) => {
+        alert('Registro exitoso');
+        this.rolActual.set(res.rol);
+
+        if (this.rolActual() === "ROLE_ADMIN") {
+          console.log(this.rolActual);
+          this.router.navigate(['/registro']);
+        }else{
+        this.router.navigate(['/planes']);
+        }
+      },
+      //Se activa si la api rechazó la petición 403, 404, 500.
+      error: () => alert('Usuario o contraseña incorrectos')
+    });
+
+
   }
 
-  cerrarSesion(){
+
+  cerrarSesion() {
     this.servicioAuth.logout();
     alert('Sesion cerrada');
     this.router.navigate(['/']);
