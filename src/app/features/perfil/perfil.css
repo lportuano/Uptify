@@ -2,13 +2,13 @@
 .main-page-container {
     background: radial-gradient(circle at center, #13141f 0%, #000000 100%);
     background-attachment: fixed;
-    min-height: 100vh; /* Ocupa el 100% del alto de la pantalla */
+    min-height: 100vh;
     width: 100%;
     position: relative;
-    padding-bottom: 100px; /* Espacio para el reproductor */
+    padding-bottom: 100px;
 }
 
-/* EFECTO ESTRELLAS (Para que no se vea vacío el negro) */
+/* EFECTO ESTRELLAS */
 .main-page-container::before {
     content: "";
     position: fixed;
@@ -25,7 +25,90 @@
     z-index: 0;
 }
 
-/* DASHBOARD GRID (Organización) */
+/* --- NUEVA SECCIÓN: TARJETA DE PERFIL GALÁCTICA --- */
+.profile-header-card {
+    background: rgba(10, 10, 15, 0.85); /* Negro galáctico */
+    border: 1px solid rgba(168, 85, 247, 0.4); /* Borde neón púrpura */
+    border-radius: 30px;
+    padding: 40px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto; /* Aparece después de app-cartas */
+    backdrop-filter: blur(15px);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+.avatar-circle {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: white;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-section {
+    flex-grow: 1;
+}
+
+.info-section h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    background: linear-gradient(to right, #ffffff, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.user-email {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* BADGES DE PLANES */
+.plan-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}
+
+.plan-badge.Premium {
+    background: rgba(250, 179, 135, 0.2);
+    color: #fab387;
+    border: 1px solid #fab387;
+    box-shadow: 0 0 15px rgba(250, 179, 135, 0.3);
+}
+
+.plan-badge.Familiar {
+    background: rgba(166, 227, 161, 0.2);
+    color: #a6e3a1;
+    border: 1px solid #a6e3a1;
+}
+
+.plan-badge.Gratuito {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* --- ESTILOS QUE YA TENÍAS --- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -37,7 +120,6 @@
     z-index: 1;
 }
 
-/* ESTILO DE TARJETAS (Negro Galáctico) */
 .grid-item {
     background: rgba(10, 10, 15, 0.8);
     border: 1px solid rgba(168, 85, 247, 0.2);
@@ -46,28 +128,12 @@
     backdrop-filter: blur(10px);
 }
 
-/* TEXTO DE USUARIOS ONLINE (Blanco Brillante) */
 .friend-name {
     color: #ffffff !important;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.friend-status {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Título Nebulosa */
-.section-title {
-    background: linear-gradient(to right, #ffffff, #a855f7, #6366f1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px;
 }
 
 @media (max-width: 900px) {
     .dashboard-grid { grid-template-columns: 1fr; }
+    .profile-header-card { flex-direction: column; text-align: center; }
 }

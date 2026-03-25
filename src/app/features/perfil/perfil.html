@@ -1,18 +1,30 @@
 <div class="main-page-container">
-    
+
     <app-cartas></app-cartas>
 
+    <div class="profile-header-card" *ngIf="usuarioInfo()">
+        <div class="avatar-circle">
+            {{ usuarioInfo()?.nombre?.charAt(0) | uppercase }}
+        </div>
+
+        <div class="info-section">
+            <h1>{{ usuarioInfo()?.nombre }}</h1>
+            <p class="user-email">{{ usuarioInfo()?.email }}</p>
+
+            <div class="plan-badge" [ngClass]="planActual()">
+                PLAN {{ planActual() || 'GRATUITO' }}
+            </div>
+        </div>
+    </div>
+
     <div class="dashboard-grid">
-        
         <div class="grid-item">
             <app-genero></app-genero>
         </div>
 
         <div class="grid-item">
             <app-online></app-online>
-            
         </div>
-
     </div>
 
 </div>
