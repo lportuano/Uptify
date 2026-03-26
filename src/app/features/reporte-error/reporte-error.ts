@@ -34,7 +34,7 @@ import { Router } from '@angular/router';
           </textarea>
 
           <button (click)="enviarReporte()" class="btn-trigger">
-            EJECUTAR PROCEDIMIENTO EN BD
+            REPORTAR PROBLEMA
           </button>
           
           <button (click)="volver()" class="btn-cancel">Cancelar</button>
@@ -63,8 +63,8 @@ import { Router } from '@angular/router';
     }
 
     .custom-select option {
-      background-color: #121212 !important; /* Fondo negro */
-      color: white !important;              /* Letras blancas */
+      background-color: #121212 !important; 
+      color: white !important;              
     }
 
     .custom-textarea { height: 120px; resize: none; }
@@ -85,7 +85,6 @@ export class ReporteError {
   moduloError: string = 'General';
 
   enviarReporte() {
-  // CAMBIO AQUÍ: Usamos 'usuarioId' en lugar de 'id'
   const idStorage = localStorage.getItem('usuarioId'); 
   
   if (!idStorage) {
@@ -101,12 +100,12 @@ export class ReporteError {
 
   this.servicioUsuario.reportarError(payload.usuarioId, payload.descripcion, payload.modulo).subscribe({
     next: () => {
-      alert('¡Procedimiento ejecutado! Reporte guardado en PostgreSQL.');
+      alert('Muchas gracias por el reporte.');
       this.errorMsg = '';
     },
     error: (err) => {
       console.error("Error:", err);
-      alert('Fallo al ejecutar el procedimiento en la base de datos.');
+      alert('Fallo al Reportar un problema.');
     }
   });
 }

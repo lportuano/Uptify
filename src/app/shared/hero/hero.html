@@ -3,7 +3,7 @@
     <source src="video/fondo.mp4" type="video/mp4" />
   </video>
 
-  <form (ngSubmit)="guardarUsuario()" id="form">
+  <form (ngSubmit)="userForm.form.valid && guardarUsuario()" #userForm="ngForm" id="form">
     <div id="form-body">
       <div id="welcome-lines">
         <div id="welcome-line-1">Uptify</div>
@@ -14,21 +14,37 @@
 
       <div id="input-area">
         <div class="form-inp">
-          <input [(ngModel)]="nuevoUsuario.nombre" name="nombre" placeholder="Nombre de usuario" type="text" required />
+          <input [(ngModel)]="nuevoUsuario.nombre" name="nombre" #nombre="ngModel"
+            placeholder="Nombre de usuario" type="text" required 
+            pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" />
+          <small *ngIf="nombre.invalid && nombre.touched" style="color: #ff4d4d; font-size: 12px; margin-left: 10px;">Solo letras permitidas</small>
         </div>
+
         <div class="form-inp">
-          <input [(ngModel)]="nuevoUsuario.email" name="email" placeholder="Correo electrónico" type="email" required />
+          <input [(ngModel)]="nuevoUsuario.email" name="email" #email="ngModel"
+            placeholder="Correo electrónico" type="email" required email />
+          <small *ngIf="email.invalid && email.touched" style="color: #ff4d4d; font-size: 12px; margin-left: 10px;">Correo inválido</small>
         </div>
+
         <div class="form-inp">
-          <input [(ngModel)]="nuevoUsuario.password" name="password" placeholder="Contraseña" type="password" required />
+          <input [(ngModel)]="nuevoUsuario.password" name="password" #pass="ngModel"
+            placeholder="Contraseña" type="password" required 
+            minlength="5" maxlength="16" pattern="^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$" />
+          <small *ngIf="pass.invalid && pass.touched" style="color: #ff4d4d; font-size: 12px; margin-left: 10px;">5-16 caracteres (letras y números)</small>
         </div>
+
         <div class="form-inp" *ngIf="!editando">
-          <input name="confirm" placeholder="Confirma tu contraseña" type="password" required />
+          <input [(ngModel)]="confirmarPassword" name="confirm" 
+            placeholder="Confirma tu contraseña" type="password" required />
+          <small *ngIf="nuevoUsuario.password !== confirmarPassword && confirmarPassword !== ''" 
+            style="color: #ff4d4d; font-size: 12px; margin-left: 10px;">No coinciden</small>
         </div>
       </div>
 
       <div id="submit-button-cvr">
-        <button (click)="mensaje()" id="submit-button" type="submit">
+        <button [disabled]="userForm.invalid || (!editando && nuevoUsuario.password !== confirmarPassword)" 
+                [style.opacity]="userForm.invalid || (!editando && nuevoUsuario.password !== confirmarPassword) ? '0.5' : '1'"
+                id="submit-button" type="submit">
           {{ editando ? 'Actualizar' : 'Registrarse' }}
         </button>
       </div>
@@ -37,7 +53,6 @@
   </form>
 
   @if (servicioAuth.rolActual() === 'ROLE_ADMIN' && (mostrarTabla || editando)) {
-  
   <div class="tabla-container-hero-wide">
     <div class="p-6 border-b border-white/10 text-center">
       <h3 class="text-2xl font-black tracking-widest bg-gradient-to-r from-[#4cc9f0] to-[#7209b7] bg-clip-text text-transparent uppercase">
@@ -71,12 +86,5 @@
       </table>
     </div>
   </div>
-
   } 
-  
-  @else if (servicioAuth.rolActual() !== 'ROLE_ADMIN' && mostrarTabla) {
-    <div class="p-4 text-center mt-4">
-    </div>
-  }
-
 </div>
