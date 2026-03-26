@@ -61,6 +61,12 @@ import { Router } from '@angular/router';
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
       color: white; padding: 12px; border-radius: 8px; margin-top: 8px; outline: none;
     }
+
+    .custom-select option {
+      background-color: #121212 !important; /* Fondo negro */
+      color: white !important;              /* Letras blancas */
+    }
+
     .custom-textarea { height: 120px; resize: none; }
     .btn-trigger {
       width: 100%; margin-top: 25px; padding: 15px; border-radius: 12px; border: none;

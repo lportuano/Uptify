@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -9,32 +9,42 @@ import { Usuario } from '../models/usuario';
 export class UsuarioServicio {
 
   private http = inject(HttpClient);
-
   private API_URL = 'http://localhost:8080/usuarios';
 
-  //metodo GET
-  getUsuario(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.API_URL)
+  /**
+   * Obtiene el ID del usuario logueado desde el localStorage para la auditoría.
+   */
+  private getAutorHeaders(): HttpHeaders {
+    const idLogueado = localStorage.getItem('usuarioId');
+    // Si no existe, enviamos 0 para evitar errores en el backend
+    return new HttpHeaders().set('X-Usuario-Id', idLogueado || '0');
   }
 
-  //metodo POST
+  // Metodo GET
+  getUsuario(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.API_URL);
+  }
+
+  // Metodo POST (Registro inicial, no requiere header de autor)
   postUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.API_URL}/registrarUsuario`, usuario);
   }
 
-  //metodo buscar por ID
+  // Metodo buscar por ID
   getUsuarioById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.API_URL}/${id}`);
   }
 
-  //metodo PUT
+  // Metodo PUT - MODIFICADO para enviar el Header
   putUsuario(id: number, usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.API_URL}/${id}`, usuario);
+    const headers = this.getAutorHeaders();
+    return this.http.put<Usuario>(`${this.API_URL}/${id}`, usuario, { headers });
   }
 
-  //metodo DELETE
+  // Metodo DELETE - MODIFICADO para enviar el Header
   deleteUsuario(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API_URL}/${id}`);
+    const headers = this.getAutorHeaders();
+    return this.http.delete<void>(`${this.API_URL}/${id}`, { headers });
   }
 
   actualizarSuscripcion(id: number, nombrePlan: string): Observable<any> {
@@ -42,7 +52,7 @@ export class UsuarioServicio {
     return this.http.put<any>(`${this.API_URL}/${id}/plan`, body);
   }
 
-  // --- NUEVO: Metodo para Reportar Error (Stored Procedure) ---
+  // --- Metodo para Reportar Error (Stored Procedure) ---
   reportarError(usuarioId: number, descripcion: string, modulo: string): Observable<any> {
     const payload = { usuarioId, descripcion, modulo };
     return this.http.post(`${this.API_URL}/reportar-error`, payload);
