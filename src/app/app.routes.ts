@@ -12,12 +12,19 @@ import { Musica } from './features/musica/musica';
 import { authGuard } from './guard/auth-guard';
 import { childGuardGuard } from './guard/child-guard-guard';
 import { authMatchGuard } from './guard/match-guard';
+import { ReporteError } from './features/reporte-error/reporte-error';
 
 export const routes: Routes = [
     // --- RUTAS PÚBLICAS ---
     { path: '', component: Home },
     { path: 'registro', component: Registro },
     { path: 'login', component: LoginPage },
+
+    {
+        path: 'reportar',
+        component: ReporteError,
+        canMatch: [authMatchGuard]
+    },
 
     // --- RUTAS PROTEGIDAS POR ROL (ADMIN) ---
     {

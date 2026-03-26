@@ -17,19 +17,6 @@ export class UsuarioServicio {
     return this.http.get<Usuario[]>(this.API_URL)
   }
 
-  // // GET: Obtener todos los usuarios
-  // getUsuario(): Observable<Usuario[]> {
-  //   return this.http.get<{ [key: string]: Usuario }>(`${this.API_URL}/usuarios.json`).pipe(
-  //     map((respuesta) => {
-  //       if (!respuesta) return [];
-  //       return Object.keys(respuesta).map((id) => ({
-  //         ...respuesta[id],
-  //         id: id,
-  //       }));
-  //     }),
-  //   );
-  // }
-
   //metodo POST
   postUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.API_URL}/registrarUsuario`, usuario);
@@ -51,8 +38,13 @@ export class UsuarioServicio {
   }
 
   actualizarSuscripcion(id: number, nombrePlan: string): Observable<any> {
-
     const body = { nombrePlan: nombrePlan };
     return this.http.put<any>(`${this.API_URL}/${id}/plan`, body);
+  }
+
+  // --- NUEVO: Metodo para Reportar Error (Stored Procedure) ---
+  reportarError(usuarioId: number, descripcion: string, modulo: string): Observable<any> {
+    const payload = { usuarioId, descripcion, modulo };
+    return this.http.post(`${this.API_URL}/reportar-error`, payload);
   }
 }
